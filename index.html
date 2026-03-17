@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SCOUT — Systematic Census Of Undiscovered Transits</title>
+  <title>Exoplanet Transit Search</title>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="1024x1024" href="favicon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -709,7 +709,7 @@
 <body>
   <nav>
     <div class="nav-inner">
-      <div class="nav-brand">SCOUT <span style="font-weight:400;color:var(--text-dim);font-size:0.75rem;margin-left:0.5rem;">Exoplanet Transit Search</span></div>
+      <div class="nav-brand">Exoplanet Transit Search</div>
       <div class="nav-links">
         <div class="nav-link active" onclick="showTab('dashboard')">Dashboard</div>
         <div class="nav-link" onclick="showTab('candidates')">Candidates</div>
@@ -1363,8 +1363,8 @@
     // ===== GUIDE =====
     function renderGuide() {
       document.getElementById('guide-content').innerHTML = `
-        <h2>SCOUT — Systematic Census Of Undiscovered Transits</h2>
-        <p>SCOUT is an automated pipeline searching for undiscovered exoplanets in publicly available NASA TESS (Transiting Exoplanet Survey Satellite) data. It runs nightly, processing new sectors and vetting candidates through an 8-layer gauntlet designed to eliminate the false positives that dominate transit searches.</p>
+        <h2>How It Works</h2>
+        <p>This is an automated pipeline searching for undiscovered exoplanets in publicly available NASA TESS (Transiting Exoplanet Survey Satellite) data. It runs nightly, processing new sectors and vetting candidates through an 8-layer gauntlet designed to eliminate the false positives that dominate transit searches.</p>
 
         <h3>Detection Modes</h3>
         <ul>
