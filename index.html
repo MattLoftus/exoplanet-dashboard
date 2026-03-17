@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exoplanet Transit Search</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="1024x1024" href="favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --surface: #111827;
+      --surface-2: #1a2236;
+      --surface-3: #212d45;
+      --border: #1e293b;
+      --border-hover: #334155;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent: #818cf8;
+      --accent-glow: rgba(129, 140, 248, 0.15);
+      --novel: #34d399;
+      --novel-glow: rgba(52, 211, 153, 0.12);
+      --known: #64748b;
+      --warning: #fbbf24;
+      --danger: #f87171;
+      --cyan: #22d3ee;
+      --font: 'SF Mono', 'Fira Code', 'JetBrains Mono', ui-monospace, monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.2), transparent),
+        radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,0.15), transparent),
+        radial-gradient(1px 1px at 90% 50%, rgba(255,255,255,0.25), transparent),
+        radial-gradient(1px 1px at 10% 90%, rgba(255,255,255,0.2), transparent),
+        radial-gradient(1px 1px at 60% 20%, rgba(255,255,255,0.1), transparent),
+        radial-gradient(1px 1px at 30% 50%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.15), transparent);
+      background-size: 200px 200px;
+      z-index: -1;
+      animation: drift 120s linear infinite;
+    }
+    @keyframes drift { to { background-position: 200px 200px; } }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+      height: 56px;
+      gap: 2rem;
+    }
+    .nav-brand {
+      font-family: var(--font);
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--accent), var(--novel));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      white-space: nowrap;
+    }
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+    }
+    .nav-link {
+      padding: 0.45rem 0.85rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.15s;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    .nav-link:hover { color: var(--text); background: var(--surface); }
+    .nav-link.active {
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+    .nav-right {
+      margin-left: auto;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      font-family: var(--font);
+    }
+
+    /* ===== LAYOUT ===== */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 3rem;
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ===== STAT CARDS ===== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .stat-card:hover { border-color: var(--border-hover); transform: translateY(-1px); }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .stat-card.accent::before { background: var(--accent); }
+    .stat-card.novel::before { background: var(--novel); }
+    .stat-card.muted::before { background: var(--known); }
+    .stat-card.warning::before { background: var(--warning); }
+    .stat-card.danger::before { background: var(--danger); }
+    .stat-card.cyan::before { background: var(--cyan); }
+    .stat-card.rocky::before { background: #a78bfa; }
+    .stat-card.rocky .value { color: #a78bfa; }
+    .stat-card.multi::before { background: #f472b6; }
+    .stat-card.multi .value { color: #f472b6; }
+    .stat-card .label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+    }
+    .stat-card .value {
+      font-family: var(--font);
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-top: 0.15rem;
+    }
+    .stat-card.accent .value { color: var(--accent); }
+    .stat-card.novel .value { color: var(--novel); }
+    .stat-card.muted .value { color: var(--text-muted); }
+    .stat-card.warning .value { color: var(--warning); }
+    .stat-card.danger .value { color: var(--danger); }
+    .stat-card.cyan .value { color: var(--cyan); }
+    .stat-card .sub {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-top: 0.15rem;
+    }
+
+    /* ===== SECTION HEADERS ===== */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--font);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ===== FILTERS ===== */
+    .filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .filter-btn {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.75rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-muted);
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover { border-color: var(--border-hover); color: var(--text); }
+    .filter-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+    .filter-btn .count {
+      font-family: var(--font);
+      font-size: 0.7rem;
+      opacity: 0.7;
+      margin-left: 0.25rem;
+    }
+    .search-input {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.75rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 6px;
+      font-family: var(--font);
+      outline: none;
+      width: 160px;
+      transition: border-color 0.15s;
+    }
+    .search-input:focus { border-color: var(--accent); }
+    .search-input::placeholder { color: var(--text-dim); }
+    .sort-select {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.75rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-muted);
+      border-radius: 6px;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* ===== TABLE ===== */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+    .data-table th {
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .data-table th:hover { color: var(--text-muted); }
+    .data-table th.sorted { color: var(--accent); }
+    .data-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid rgba(30, 41, 59, 0.5);
+      font-family: var(--font);
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+    .data-table tr { cursor: pointer; transition: background 0.1s; }
+    .data-table tbody tr:hover { background: var(--surface-2); }
+    .data-table .text-col { font-family: var(--font-sans); }
+
+    /* ===== BADGES ===== */
+    .badge {
+      display: inline-block;
+      font-size: 0.6rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge.novel { background: var(--novel-glow); color: var(--novel); border: 1px solid rgba(52,211,153,0.25); }
+    .badge.known { background: rgba(100,116,139,0.12); color: var(--known); border: 1px solid rgba(100,116,139,0.25); }
+    .badge.grade-a { background: rgba(52,211,153,0.12); color: #34d399; border: 1px solid rgba(52,211,153,0.25); }
+    .badge.grade-b { background: rgba(251,191,36,0.12); color: #fbbf24; border: 1px solid rgba(251,191,36,0.25); }
+    .badge.grade-c { background: rgba(100,116,139,0.12); color: #94a3b8; border: 1px solid rgba(100,116,139,0.25); }
+    .badge.grade-eb { background: rgba(248,113,113,0.12); color: #f87171; border: 1px solid rgba(248,113,113,0.25); }
+    .badge.confirmed { background: rgba(34,211,238,0.12); color: var(--cyan); border: 1px solid rgba(34,211,238,0.25); }
+    .badge.refined { background: rgba(129,140,248,0.12); color: var(--accent); border: 1px solid rgba(129,140,248,0.25); }
+    .badge.dead { background: rgba(248,113,113,0.12); color: var(--danger); border: 1px solid rgba(248,113,113,0.25); }
+
+    /* ===== DETAIL PANEL ===== */
+    .detail-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+    }
+    .detail-overlay.open { display: flex; justify-content: center; align-items: flex-start; padding-top: 5vh; }
+    .detail-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      width: 90%;
+      max-width: 900px;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .detail-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--surface);
+      z-index: 1;
+    }
+    .detail-header h2 {
+      font-family: var(--font);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .detail-close {
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+    .detail-close:hover { background: var(--surface-2); color: var(--text); }
+    .detail-body { padding: 1.5rem; }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .detail-item .label {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+    }
+    .detail-item .val {
+      font-family: var(--font);
+      font-size: 0.9rem;
+      margin-top: 0.1rem;
+    }
+    .detail-section {
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    .detail-section h3 {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+    }
+    .checks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .check {
+      font-size: 0.65rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-family: var(--font);
+    }
+    .check.pass { background: rgba(52,211,153,0.08); color: var(--novel); border: 1px solid rgba(52,211,153,0.15); }
+    .check.fail { background: rgba(248,113,113,0.08); color: var(--danger); border: 1px solid rgba(248,113,113,0.15); }
+    .plot-container {
+      margin-top: 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .plot-container img { width: 100%; display: block; }
+    .vetting-box {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+    }
+    .vetting-box .reason {
+      font-size: 0.82rem;
+      color: var(--text);
+    }
+    .flags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.5rem;
+    }
+    .flag {
+      font-size: 0.65rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      background: rgba(251,191,36,0.1);
+      color: var(--warning);
+      border: 1px solid rgba(251,191,36,0.2);
+      font-family: var(--font);
+    }
+
+    /* ===== DEEP VET CARDS ===== */
+    .dv-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 1rem;
+    }
+    .dv-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: visible;
+      transition: border-color 0.2s;
+      cursor: pointer;
+    }
+    .dv-card:hover { border-color: var(--border-hover); }
+    .dv-card-header {
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+    .dv-card-header h3 { font-family: var(--font); font-size: 0.95rem; }
+    .dv-card-body { padding: 1rem 1.25rem; }
+    .dv-metric-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.78rem;
+      border-bottom: 1px solid rgba(30,41,59,0.3);
+    }
+    .dv-metric-row:last-child { border-bottom: none; }
+    .dv-metric-row .k { color: var(--text-muted); }
+    .dv-metric-row .v { font-family: var(--font); color: var(--text); }
+    .dv-arrow {
+      color: var(--text-dim);
+      margin: 0 0.35rem;
+    }
+
+    /* ===== GUIDE ===== */
+    .guide-content {
+      max-width: 800px;
+    }
+    .guide-content h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    .guide-content h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .guide-content p, .guide-content li {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    .guide-content ul { margin-left: 1.25rem; margin-bottom: 0.75rem; }
+    .guide-content strong { color: var(--text); font-weight: 600; }
+    .guide-content code {
+      font-family: var(--font);
+      font-size: 0.78rem;
+      background: var(--surface-2);
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+      color: var(--accent);
+    }
+    .guide-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      margin: 0.75rem 0 1rem;
+    }
+    .guide-table th, .guide-table td {
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .guide-table th {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .guide-table td { color: var(--text-muted); font-family: var(--font); font-size: 0.78rem; }
+
+    /* ===== PLANET GALLERY ===== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .planet-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: border-color 0.15s, transform 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+    .planet-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+    .planet-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .planet-card.type-rocky::before { background: #34d399; }
+    .planet-card.type-superearth::before { background: #22d3ee; }
+    .planet-card.type-subneptune::before { background: #818cf8; }
+    .planet-card.type-neptune::before { background: #fbbf24; }
+    .planet-card.type-jupiter::before { background: #f87171; }
+    .planet-card .pc-tic {
+      font-family: var(--font);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .planet-card .pc-radius {
+      font-family: var(--font);
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .planet-card .pc-radius-label {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-bottom: 0.75rem;
+    }
+    .planet-card .pc-type {
+      display: inline-block;
+      font-size: 0.65rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    .planet-card .pc-detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.2rem 0;
+      font-size: 0.75rem;
+      border-bottom: 1px solid rgba(30,41,59,0.3);
+    }
+    .planet-card .pc-detail-row:last-child { border-bottom: none; }
+    .planet-card .pc-detail-row .k { color: var(--text-muted); }
+    .planet-card .pc-detail-row .v { font-family: var(--font); color: var(--text); }
+
+    /* ===== PIPELINE STATS ===== */
+    .pipeline-section {
+      margin-top: 2rem;
+    }
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+    }
+    .pipeline-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+    .pipeline-box h3 {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+    }
+    .depth-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+      font-size: 0.75rem;
+    }
+    .depth-bar-row .label { width: 80px; color: var(--text-muted); font-size: 0.7rem; }
+    .depth-bar-row .bar-wrap { flex: 1; height: 18px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+    .depth-bar-row .bar { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 6px; font-size: 0.65rem; font-family: var(--font); color: var(--bg); font-weight: 600; }
+    .depth-bar-row .bar-val { width: 45px; text-align: right; font-family: var(--font); color: var(--text); font-size: 0.75rem; }
+
+    /* Radius color coding */
+    .radius-green { color: #34d399; }
+    .radius-blue { color: #60a5fa; }
+    .radius-orange { color: #fb923c; }
+    .radius-red { color: #f87171; }
+
+    /* TOI badge */
+    .badge.toi { background: rgba(34,211,238,0.12); color: var(--cyan); border: 1px solid rgba(34,211,238,0.25); }
+
+    /* ===== TOOLTIPS ===== */
+    .tip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 12px;
+      height: 12px;
+      font-size: 8px;
+      font-weight: 700;
+      font-family: var(--font-sans);
+      color: var(--text-dim);
+      border: 1px solid var(--text-dim);
+      border-radius: 50%;
+      margin-left: 4px;
+      cursor: help;
+      position: relative;
+      vertical-align: middle;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .tip:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .tip::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a2236;
+      color: var(--text);
+      font-size: 0.7rem;
+      font-weight: 400;
+      line-height: 1.45;
+      letter-spacing: 0;
+      text-transform: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border-hover);
+      white-space: normal;
+      width: max-content;
+      max-width: 240px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+      z-index: 999;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+    .tip:hover::after {
+      opacity: 1;
+    }
+    /* Keep tooltips on-screen for right-aligned headers */
+    th:last-child .tip::after,
+    th:nth-last-child(2) .tip::after {
+      left: auto;
+      right: 0;
+      transform: none;
+    }
+    th:first-child .tip::after {
+      left: 0;
+      transform: none;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .container { padding: 1rem; }
+      .nav-inner { padding: 0 1rem; gap: 1rem; }
+      .nav-brand { font-size: 0.8rem; }
+      .nav-link { padding: 0.35rem 0.6rem; font-size: 0.7rem; }
+      .nav-right { display: none; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .data-table { font-size: 0.7rem; }
+      .detail-panel { width: 95%; }
+      .dv-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-brand">Exoplanet Transit Search</div>
+      <div class="nav-links">
+        <div class="nav-link active" onclick="showTab('dashboard')">Dashboard</div>
+        <div class="nav-link" onclick="showTab('candidates')">Candidates</div>
+        <div class="nav-link" onclick="showTab('gallery')">Planet Gallery</div>
+        <div class="nav-link" onclick="showTab('deepvet')">Deep Vet</div>
+        <div class="nav-link" onclick="showTab('pipeline')">Pipeline Stats</div>
+        <div class="nav-link" onclick="showTab('guide')">Guide</div>
+      </div>
+      <div class="nav-right" id="nav-timestamp"></div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- ===== DASHBOARD TAB ===== -->
+    <div class="tab-content active" id="tab-dashboard">
+      <div class="stats-grid" id="stats-grid"></div>
+      <div class="section-header">
+        <div class="section-title">Top Candidates</div>
+      </div>
+      <div id="top-candidates"></div>
+    </div>
+
+    <!-- ===== CANDIDATES TAB ===== -->
+    <div class="tab-content" id="tab-candidates">
+      <div class="section-header">
+        <div class="section-title">All Candidates</div>
+      </div>
+      <div class="filters" id="candidate-filters"></div>
+      <div id="candidates-table-wrap"></div>
+    </div>
+
+    <!-- ===== DEEP VET TAB ===== -->
+    <div class="tab-content" id="tab-deepvet">
+      <div class="section-header">
+        <div class="section-title">Deep Vetting Results</div>
+      </div>
+      <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1.25rem;">
+        Multi-sector stacking validates single-sector candidates. Signals that strengthen with more data are more likely real planets.
+      </p>
+      <div class="dv-cards" id="deepvet-cards"></div>
+    </div>
+
+    <!-- ===== PLANET GALLERY TAB ===== -->
+    <div class="tab-content" id="tab-gallery">
+      <div class="section-header">
+        <div class="section-title">Planet Gallery</div>
+      </div>
+      <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1.25rem;">
+        Characterized candidates sorted by estimated radius (smallest first). Only Grade A and B candidates shown. Color-coded by planet type.
+      </p>
+      <div class="gallery-grid" id="gallery-grid"></div>
+    </div>
+
+    <!-- ===== PIPELINE STATS TAB ===== -->
+    <div class="tab-content" id="tab-pipeline">
+      <div class="section-header">
+        <div class="section-title">Pipeline Performance</div>
+      </div>
+      <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1.25rem;">
+        Injection-recovery tests and known planet recovery validate the pipeline's sensitivity and reliability.
+      </p>
+      <div class="pipeline-grid" id="pipeline-grid"></div>
+    </div>
+
+    <!-- ===== GUIDE TAB ===== -->
+    <div class="tab-content" id="tab-guide">
+      <div class="guide-content" id="guide-content"></div>
+    </div>
+  </div>
+
+  <!-- Detail overlay -->
+  <div class="detail-overlay" id="detail-overlay" onclick="if(event.target===this)closeDetail()">
+    <div class="detail-panel" id="detail-panel"></div>
+  </div>
+
+  <script>
+    let DATA = null;
+    let currentFilter = 'all';
+    let currentSort = 'sde';
+    let sortDir = -1; // descending
+
+    // ===== NAVIGATION =====
+    function showTab(name) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      document.getElementById('tab-' + name).classList.add('active');
+      document.querySelector(`.nav-link[onclick="showTab('${name}')"]`).classList.add('active');
+    }
+
+    // ===== LOAD DATA =====
+    async function loadData() {
+      try {
+        const resp = await fetch('data/dashboard.json');
+        DATA = await resp.json();
+      } catch (e) {
+        document.getElementById('stats-grid').innerHTML = '<div style="color:var(--text-muted);padding:2rem;">No data — run the pipeline first.</div>';
+        return;
+      }
+      renderDashboard();
+      renderCandidates();
+      renderGallery();
+      renderDeepVet();
+      renderPipeline();
+      renderGuide();
+      if (DATA.generated_at) {
+        document.getElementById('nav-timestamp').textContent = 'Updated ' + new Date(DATA.generated_at).toLocaleDateString();
+      }
+    }
+
+    // ===== DASHBOARD =====
+    function renderDashboard() {
+      const { stats, candidates, deep_vets } = DATA;
+      const gradeA = candidates.filter(c => c.grade === 'A');
+      const gradeB = candidates.filter(c => c.grade === 'B');
+      const gradeEB = candidates.filter(c => c.grade === 'EB');
+      const novel = candidates.filter(c => !c.is_known);
+      const dvConfirmed = (deep_vets || []).filter(d => d.verdict === 'CONFIRMED' || d.verdict === 'REFINED');
+      const rocky = candidates.filter(c => c.planet_type === 'Rocky/Terrestrial');
+      const multiPlanet = stats.multi_planet_systems || 0;
+
+      document.getElementById('stats-grid').innerHTML = `
+        <div class="stat-card accent" onclick="filterFromCard('all')">
+          <div class="label">Targets Searched</div>
+          <div class="value">${stats.targets_processed.toLocaleString()}</div>
+          <div class="sub">${stats.no_signal.toLocaleString()} no signal</div>
+        </div>
+        <div class="stat-card novel" onclick="filterFromCard('A')">
+          <div class="label">Grade A</div>
+          <div class="value">${gradeA.length}</div>
+          <div class="sub">Strong, no red flags</div>
+        </div>
+        <div class="stat-card warning" onclick="filterFromCard('B')">
+          <div class="label">Grade B</div>
+          <div class="value">${gradeB.length}</div>
+          <div class="sub">Needs more data</div>
+        </div>
+        <div class="stat-card rocky" onclick="filterFromCard('rocky')">
+          <div class="label">Rocky Planets</div>
+          <div class="value">${rocky.length}</div>
+          <div class="sub">R &lt; 1.5 R&#8853;</div>
+        </div>
+        <div class="stat-card multi" onclick="filterFromCard('multi')">
+          <div class="label">Multi-Planet</div>
+          <div class="value">${multiPlanet}</div>
+          <div class="sub">Systems with 2+ signals</div>
+        </div>
+        <div class="stat-card danger" onclick="filterFromCard('EB')">
+          <div class="label">Eclipsing Binaries</div>
+          <div class="value">${gradeEB.length}</div>
+          <div class="sub">Filtered out</div>
+        </div>
+        <div class="stat-card cyan" onclick="showTab('deepvet')">
+          <div class="label">Deep Vet Survivors</div>
+          <div class="value">${dvConfirmed.length}</div>
+          <div class="sub">of ${(deep_vets||[]).length} tested</div>
+        </div>
+        <div class="stat-card muted" onclick="filterFromCard('novel')">
+          <div class="label">Novel Candidates</div>
+          <div class="value">${novel.length}</div>
+          <div class="sub">Not in TOI catalog</div>
+        </div>
+      `;
+
+      // Top candidates: Grade A sorted by SDE
+      const top = [...gradeA].filter(c => !c.is_known).sort((a, b) => b.sde - a.sde).slice(0, 8);
+      document.getElementById('top-candidates').innerHTML = `
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>TIC ID<span class="tip" data-tip="TESS Input Catalog identifier — unique ID for each star observed by TESS">?</span></th>
+              <th>Period (d)<span class="tip" data-tip="Orbital period in days — how long the planet takes to orbit its star">?</span></th>
+              <th>Depth (ppt)<span class="tip" data-tip="Transit depth in parts per thousand — how much the star dims during transit">?</span></th>
+              <th>SDE<span class="tip" data-tip="Signal Detection Efficiency — strength of the periodic signal. Higher = more confident detection">?</span></th>
+              <th>SNR<span class="tip" data-tip="Signal-to-Noise Ratio — transit signal strength relative to noise. Higher = cleaner signal">?</span></th>
+              <th>Transits<span class="tip" data-tip="Number of individual transit events detected in the light curve">?</span></th>
+              <th>Deep Vet<span class="tip" data-tip="Multi-sector validation result — whether the signal survives when more TESS data is added">?</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            ${top.map(c => {
+              const dv = (DATA.deep_vets||[]).find(d => d.tic_id === c.tic_id);
+              const dvBadge = dv ? verdictBadge(dv.verdict) : '<span style="color:var(--text-dim)">—</span>';
+              return `<tr onclick="showDetail(${c.tic_id}, ${c.planet_num})">
+                <td>${c.tic_id}</td>
+                <td>${c.period_days.toFixed(4)}</td>
+                <td>${c.depth_ppt.toFixed(2)}</td>
+                <td style="color:var(--novel)">${c.sde.toFixed(1)}</td>
+                <td>${c.snr.toFixed(1)}</td>
+                <td>${c.n_transits || c.n_transit_times}</td>
+                <td>${dvBadge}</td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function verdictBadge(verdict) {
+      if (!verdict) return '';
+      const map = {
+        'CONFIRMED': ['confirmed', 'Confirmed'],
+        'REFINED': ['refined', 'Refined'],
+        'NOT_RECOVERED': ['dead', 'Not Recovered'],
+        'WEAK': ['grade-c', 'Weak'],
+      };
+      const [cls, label] = map[verdict] || ['grade-c', verdict];
+      return `<span class="badge ${cls}">${label}</span>`;
+    }
+
+    // ===== CANDIDATES TABLE =====
+    function renderCandidates() {
+      const { candidates } = DATA;
+      const counts = {
+        all: candidates.length,
+        A: candidates.filter(c => c.grade === 'A').length,
+        B: candidates.filter(c => c.grade === 'B').length,
+        EB: candidates.filter(c => c.grade === 'EB').length,
+        C: candidates.filter(c => c.grade === 'C').length,
+        novel: candidates.filter(c => !c.is_known).length,
+        known: candidates.filter(c => c.is_known).length,
+        rocky: candidates.filter(c => c.planet_type === 'Rocky/Terrestrial').length,
+        multi: candidates.filter(c => c.is_multi_planet).length,
+      };
+
+      document.getElementById('candidate-filters').innerHTML = `
+        <button class="filter-btn ${currentFilter==='all'?'active':''}" onclick="setFilter('all')">All <span class="count">${counts.all}</span></button>
+        <button class="filter-btn ${currentFilter==='A'?'active':''}" onclick="setFilter('A')">Grade A <span class="count">${counts.A}</span></button>
+        <button class="filter-btn ${currentFilter==='B'?'active':''}" onclick="setFilter('B')">Grade B <span class="count">${counts.B}</span></button>
+        <button class="filter-btn ${currentFilter==='EB'?'active':''}" onclick="setFilter('EB')">EB <span class="count">${counts.EB}</span></button>
+        <button class="filter-btn ${currentFilter==='novel'?'active':''}" onclick="setFilter('novel')">Novel <span class="count">${counts.novel}</span></button>
+        <button class="filter-btn ${currentFilter==='rocky'?'active':''}" onclick="setFilter('rocky')">Rocky <span class="count">${counts.rocky}</span></button>
+        <button class="filter-btn ${currentFilter==='multi'?'active':''}" onclick="setFilter('multi')">Multi-Planet <span class="count">${counts.multi}</span></button>
+        <input class="search-input" type="text" placeholder="Search TIC ID..." oninput="searchCandidates(this.value)" id="search-tic">
+        <select class="sort-select" onchange="setSortField(this.value)" id="sort-field">
+          <option value="sde">Sort by SDE</option>
+          <option value="depth_ppt">Sort by Depth</option>
+          <option value="period_days">Sort by Period</option>
+          <option value="snr">Sort by SNR</option>
+          <option value="rp_rearth">Sort by Radius</option>
+          <option value="tic_id">Sort by TIC ID</option>
+        </select>
+      `;
+
+      renderCandidateTable();
+    }
+
+    let searchTerm = '';
+    function searchCandidates(val) { searchTerm = val; renderCandidateTable(); }
+    function setFilter(f) { currentFilter = f; renderCandidates(); }
+    function filterFromCard(f) { currentFilter = f; showTab('candidates'); renderCandidates(); }
+    function setSortField(f) { currentSort = f; renderCandidateTable(); }
+
+    function radiusClass(r) {
+      if (r == null) return '';
+      if (r < 1.5) return 'radius-green';
+      if (r < 4) return 'radius-blue';
+      if (r < 10) return 'radius-orange';
+      return 'radius-red';
+    }
+
+    function planetTypeBadgeClass(type) {
+      if (!type) return 'grade-c';
+      const map = { 'Rocky/Terrestrial': 'grade-a', 'Super-Earth': 'confirmed', 'Sub-Neptune': 'refined', 'Neptune-class': 'grade-b', 'Jupiter-class': 'grade-eb' };
+      return map[type] || 'grade-c';
+    }
+
+    function planetTypeShort(type) {
+      if (!type) return '';
+      const map = { 'Rocky/Terrestrial': 'Rocky', 'Super-Earth': 'Super-E', 'Sub-Neptune': 'Sub-Nep', 'Neptune-class': 'Neptune', 'Jupiter-class': 'Jupiter' };
+      return map[type] || type;
+    }
+
+    function renderCandidateTable() {
+      let filtered = [...DATA.candidates];
+
+      // Filter
+      if (currentFilter === 'novel') filtered = filtered.filter(c => !c.is_known);
+      else if (currentFilter === 'known') filtered = filtered.filter(c => c.is_known);
+      else if (currentFilter === 'rocky') filtered = filtered.filter(c => c.planet_type === 'Rocky/Terrestrial');
+      else if (currentFilter === 'multi') filtered = filtered.filter(c => c.is_multi_planet);
+      else if (['A','B','C','EB'].includes(currentFilter)) filtered = filtered.filter(c => c.grade === currentFilter);
+
+      // Search
+      if (searchTerm) filtered = filtered.filter(c => String(c.tic_id).includes(searchTerm));
+
+      // Sort
+      filtered.sort((a, b) => {
+        const av = a[currentSort] ?? 0;
+        const bv = b[currentSort] ?? 0;
+        return (bv - av) * sortDir;
+      });
+
+      // Check if any candidates have characterized data
+      const hasCharData = filtered.some(c => c.rp_rearth != null);
+      const hasTOI = filtered.some(c => c.toi_match != null || c.is_known);
+
+      document.getElementById('candidates-table-wrap').innerHTML = `
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th onclick="toggleSort('tic_id')" class="${currentSort==='tic_id'?'sorted':''}">TIC ID<span class="tip" data-tip="TESS Input Catalog identifier — unique ID for each star observed by TESS">?</span></th>
+              <th>Grade<span class="tip" data-tip="Quality grade: A = strong candidate, B = needs more data, C = marginal, EB = eclipsing binary">?</span></th>
+              <th>TOI Match<span class="tip" data-tip="TOI catalog cross-match: TOI ID if matched, Novel if not in catalog">?</span></th>
+              <th onclick="toggleSort('period_days')" class="${currentSort==='period_days'?'sorted':''}">Period (d)<span class="tip" data-tip="Orbital period in days — how long the planet takes to orbit its star">?</span></th>
+              <th onclick="toggleSort('depth_ppt')" class="${currentSort==='depth_ppt'?'sorted':''}">Depth (ppt)<span class="tip" data-tip="Transit depth in parts per thousand — how much the star dims during transit">?</span></th>
+              ${hasCharData ? `<th onclick="toggleSort('rp_rearth')" class="${currentSort==='rp_rearth'?'sorted':''}">Est. Radius<span class="tip" data-tip="Estimated planet radius in Earth radii, derived from transit depth and host star radius">?</span></th>` : ''}
+              ${hasCharData ? `<th>Type<span class="tip" data-tip="Planet classification based on estimated radius">?</span></th>` : ''}
+              <th onclick="toggleSort('sde')" class="${currentSort==='sde'?'sorted':''}">SDE<span class="tip" data-tip="Signal Detection Efficiency — strength of the periodic signal. Higher = more confident detection">?</span></th>
+              <th onclick="toggleSort('snr')" class="${currentSort==='snr'?'sorted':''}">SNR<span class="tip" data-tip="Signal-to-Noise Ratio — transit signal strength relative to noise. Higher = cleaner signal">?</span></th>
+              <th>Transits<span class="tip" data-tip="Number of individual transit events detected in the light curve">?</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            ${filtered.map(c => {
+              const toiCell = c.toi_match
+                ? `<span class="badge toi">TOI-${c.toi_match}</span>`
+                : (c.is_known ? `<span class="badge known">Known</span>` : `<span class="badge novel">Novel</span>`);
+              const radiusCell = hasCharData
+                ? `<td class="${radiusClass(c.rp_rearth)}">${c.rp_rearth != null ? c.rp_rearth.toFixed(1) + ' R&#8853;' : '<span style="color:var(--text-dim)">--</span>'}</td>` : '';
+              const typeCell = hasCharData
+                ? `<td>${c.planet_type ? `<span class="badge ${planetTypeBadgeClass(c.planet_type)}">${planetTypeShort(c.planet_type)}</span>` : '<span style="color:var(--text-dim)">--</span>'}</td>` : '';
+              return `<tr onclick="showDetail(${c.tic_id}, ${c.planet_num})">
+                <td>${c.tic_id}${c.planet_num > 1 ? ' p'+c.planet_num : ''}</td>
+                <td><span class="badge grade-${c.grade.toLowerCase()}">${c.grade === 'EB' ? 'EB' : c.grade}</span></td>
+                <td>${toiCell}</td>
+                <td>${c.period_days.toFixed(4)}</td>
+                <td>${c.depth_ppt.toFixed(2)}</td>
+                ${radiusCell}
+                ${typeCell}
+                <td style="color:${c.sde >= 15 ? 'var(--novel)' : c.sde >= 10 ? 'var(--accent)' : 'var(--text)'}">${c.sde.toFixed(1)}</td>
+                <td>${c.snr.toFixed(1)}</td>
+                <td>${c.n_transits || c.n_transit_times}</td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+        <div style="padding:0.75rem;font-size:0.7rem;color:var(--text-dim)">
+          Showing ${filtered.length} of ${DATA.candidates.length} candidates. Click any row for details.
+        </div>
+      `;
+    }
+
+    function toggleSort(field) {
+      if (currentSort === field) sortDir *= -1;
+      else { currentSort = field; sortDir = -1; }
+      document.getElementById('sort-field').value = field;
+      renderCandidateTable();
+    }
+
+    // ===== DETAIL PANEL =====
+    function showDetail(ticId, planetNum) {
+      const c = DATA.candidates.find(x => x.tic_id === ticId && x.planet_num === planetNum);
+      if (!c) return;
+
+      const checks = c.checks || {};
+      const checksHtml = Object.entries(checks).map(([k, v]) => {
+        const pass = v === true || v === 'True';
+        return `<span class="check ${pass ? 'pass' : 'fail'}">${pass ? '✓' : '✗'} ${k.replace(/_/g, ' ')}</span>`;
+      }).join('');
+
+      const dv = (DATA.deep_vets || []).find(d => d.tic_id === ticId);
+      const dvSection = dv ? `
+        <div class="detail-section">
+          <h3>Deep Vet Results<span class="tip" data-tip="Validation using ALL available TESS sectors — the strongest test of a candidate's reality">?</span></h3>
+          <div class="vetting-box">
+            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
+              ${verdictBadge(dv.verdict)}
+              <span style="font-size:0.78rem;color:var(--text-muted)">${dv.n_sectors} sectors, ${dv.timespan_days?.toFixed(0) || '?'} days</span>
+            </div>
+            <div class="detail-grid">
+              <div class="detail-item"><div class="label">Deep Vet Period</div><div class="val">${dv.best_period?.toFixed(6) || '?'}d</div></div>
+              <div class="detail-item"><div class="label">Deep Vet SDE</div><div class="val" style="color:var(--novel)">${dv.best_sde?.toFixed(1) || '?'}</div></div>
+              <div class="detail-item"><div class="label">Deep Vet Depth</div><div class="val">${dv.best_depth_ppt?.toFixed(3) || '?'} ppt</div></div>
+              <div class="detail-item"><div class="label">Transits (deep)</div><div class="val">${dv.n_transits || '?'}</div></div>
+              <div class="detail-item"><div class="label">V-shape<span class="tip" data-tip="Transit shape metric: 0 = flat-bottomed (planet-like), 1 = V-shaped (eclipsing binary)">?</span></div><div class="val">${dv.vshape?.toFixed(3) || '?'}</div></div>
+              <div class="detail-item"><div class="label">Secondary Eclipse<span class="tip" data-tip="Brightness dip at orbital phase 0.5 — indicates eclipsing binary if significant (>0.3 ppt)">?</span></div><div class="val">${dv.secondary_eclipse ? (dv.secondary_eclipse * 1000).toFixed(3) + ' ppt' : 'None'}</div></div>
+            </div>
+          </div>
+          ${dv.plot_filename ? `<div class="plot-container"><img src="../results/deep_vet/${dv.plot_filename}" alt="Deep vet plot" onerror="this.parentElement.style.display='none'" /></div>` : ''}
+        </div>
+      ` : '';
+
+      document.getElementById('detail-panel').innerHTML = `
+        <div class="detail-header">
+          <div style="display:flex;align-items:center;gap:0.75rem">
+            <h2>TIC ${c.tic_id}${c.planet_num > 1 ? ' — Planet #'+c.planet_num : ''}</h2>
+            <span class="badge ${c.is_known ? 'known' : 'novel'}">${c.is_known ? 'Known — TOI '+(c.matching_toi||'?') : 'Novel'}</span>
+            <span class="badge grade-${c.grade.toLowerCase()}">${c.grade === 'EB' ? 'Eclipsing Binary' : 'Grade ' + c.grade}</span>
+          </div>
+          <span class="detail-close" onclick="closeDetail()">✕</span>
+        </div>
+        <div class="detail-body">
+          <h3 style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem">Orbital Parameters<span class="tip" data-tip="Key measurements of the candidate's orbit derived from transit fitting">?</span></h3>
+          <div class="detail-grid">
+            <div class="detail-item"><div class="label">Orbital Period</div><div class="val">${c.period_days.toFixed(6)} days</div></div>
+            <div class="detail-item"><div class="label">Period (hours)</div><div class="val">${(c.period_days * 24).toFixed(2)} h</div></div>
+            <div class="detail-item"><div class="label">Transit Depth</div><div class="val">${c.depth_ppt.toFixed(4)} ppt</div></div>
+            <div class="detail-item"><div class="label">Depth (ppm)</div><div class="val">${(c.depth_ppt * 100).toFixed(1)} ppm</div></div>
+            <div class="detail-item"><div class="label">Transit Duration</div><div class="val">${c.duration_hours.toFixed(3)} hours</div></div>
+            <div class="detail-item"><div class="label">Epoch (T0)</div><div class="val">BTJD ${c.t0_btjd.toFixed(4)}</div></div>
+            <div class="detail-item"><div class="label">SDE</div><div class="val" style="color:var(--novel)">${c.sde.toFixed(2)}</div></div>
+            <div class="detail-item"><div class="label">SNR</div><div class="val">${c.snr.toFixed(2)}</div></div>
+            <div class="detail-item"><div class="label">Transits Detected</div><div class="val">${c.n_transits || c.n_transit_times}</div></div>
+            ${c.vetting?.metrics?.vshape != null ? `<div class="detail-item"><div class="label">V-shape Metric</div><div class="val">${c.vetting.metrics.vshape.toFixed(3)}</div></div>` : ''}
+            ${c.vetting?.metrics?.secondary_eclipse_depth != null ? `<div class="detail-item"><div class="label">Secondary Eclipse</div><div class="val">${(c.vetting.metrics.secondary_eclipse_depth * 1000).toFixed(3)} ppt</div></div>` : ''}
+          </div>
+
+          ${c.rp_rearth != null ? `
+          <div class="detail-section">
+            <h3>Planet Characterization<span class="tip" data-tip="Estimated planet properties derived from transit depth and host star parameters from TIC catalog">?</span></h3>
+            <div class="detail-grid">
+              <div class="detail-item"><div class="label">Est. Radius</div><div class="val ${radiusClass(c.rp_rearth)}">${c.rp_rearth.toFixed(2)} R&#8853;</div></div>
+              <div class="detail-item"><div class="label">Planet Type</div><div class="val"><span class="badge ${planetTypeBadgeClass(c.planet_type)}">${c.planet_type || '?'}</span></div></div>
+              ${c.a_au != null ? `<div class="detail-item"><div class="label">Semi-major Axis</div><div class="val">${c.a_au.toFixed(4)} AU</div></div>` : ''}
+              ${c.teq_k != null ? `<div class="detail-item"><div class="label">Eq. Temperature</div><div class="val">${c.teq_k.toFixed(0)} K</div></div>` : ''}
+              ${c.insolation_earth != null ? `<div class="detail-item"><div class="label">Insolation</div><div class="val">${c.insolation_earth.toFixed(1)} S&#8853;</div></div>` : ''}
+              ${c.hz_status ? `<div class="detail-item"><div class="label">HZ Status</div><div class="val">${c.hz_status}</div></div>` : ''}
+            </div>
+          </div>
+          ` : ''}
+
+          ${c.stellar_teff != null ? `
+          <div class="detail-section">
+            <h3>Host Star<span class="tip" data-tip="Stellar parameters from the TESS Input Catalog (TIC)">?</span></h3>
+            <div class="detail-grid">
+              <div class="detail-item"><div class="label">Teff</div><div class="val">${c.stellar_teff.toFixed(0)} K</div></div>
+              ${c.stellar_radius != null ? `<div class="detail-item"><div class="label">Radius</div><div class="val">${c.stellar_radius.toFixed(3)} R&#9737;</div></div>` : ''}
+              ${c.stellar_mass != null ? `<div class="detail-item"><div class="label">Mass</div><div class="val">${c.stellar_mass.toFixed(2)} M&#9737;</div></div>` : ''}
+              ${c.stellar_tmag != null ? `<div class="detail-item"><div class="label">TESS Mag</div><div class="val">${c.stellar_tmag.toFixed(2)}</div></div>` : ''}
+              ${c.distance_pc != null ? `<div class="detail-item"><div class="label">Distance</div><div class="val">${c.distance_pc.toFixed(1)} pc</div></div>` : ''}
+            </div>
+          </div>
+          ` : ''}
+
+          ${c.vetting ? `
+            <div class="detail-section">
+            <h3>Vetting Assessment<span class="tip" data-tip="Detailed analysis of whether the signal is consistent with a real planet vs false positive">?</span></h3>
+            <div class="vetting-box">
+              <div class="reason">${c.vetting.reason || '—'}</div>
+              ${c.vetting.flags?.length ? `<div class="flags">${c.vetting.flags.map(f => `<span class="flag">${f}</span>`).join('')}</div>` : ''}
+            </div>
+            </div>
+          ` : ''}
+
+          <div class="detail-section">
+            <h3>Quality Checks<span class="tip" data-tip="Automated tests each candidate must pass to be considered viable">?</span></h3>
+            <div class="checks">${checksHtml}</div>
+          </div>
+
+          ${dvSection}
+
+          ${c.plot_filename ? `
+            <div class="detail-section">
+              <h3>Diagnostic Plot<span class="tip" data-tip="Light curve visualization showing the detected transit signal and model fit">?</span></h3>
+              <div class="plot-container">
+                <img src="../results/plots/${c.plot_filename}" alt="Diagnostic plot for TIC ${c.tic_id}"
+                     onerror="this.parentElement.innerHTML='<p style=\\'padding:1rem;color:var(--text-dim)\\'>Plot not available</p>'" />
+              </div>
+            </div>
+          ` : ''}
+        </div>
+      `;
+      document.getElementById('detail-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDetail() {
+      document.getElementById('detail-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+
+    // ===== DEEP VET =====
+    function renderDeepVet() {
+      const dvs = DATA.deep_vets || [];
+      if (!dvs.length) {
+        document.getElementById('deepvet-cards').innerHTML = '<p style="color:var(--text-muted)">No deep vet results yet.</p>';
+        return;
+      }
+
+      // Sort: confirmed/refined first, then by SDE
+      const sorted = [...dvs].sort((a, b) => {
+        const order = { CONFIRMED: 0, REFINED: 1, WEAK: 2, NOT_RECOVERED: 3 };
+        const oa = order[a.verdict] ?? 9;
+        const ob = order[b.verdict] ?? 9;
+        if (oa !== ob) return oa - ob;
+        return (b.best_sde || 0) - (a.best_sde || 0);
+      });
+
+      document.getElementById('deepvet-cards').innerHTML = sorted.map(dv => {
+        const orig = DATA.candidates.find(c => c.tic_id === dv.tic_id);
+        return `
+          <div class="dv-card" onclick="showDvDetail(${dv.tic_id})">
+            <div class="dv-card-header">
+              <h3>TIC ${dv.tic_id}</h3>
+              ${verdictBadge(dv.verdict)}
+              <span class="tip" data-tip="Final determination: Confirmed (exact period match), Refined (period improved with more data), EB (eclipsing binary), Not Recovered (signal disappeared)">?</span>
+            </div>
+            <div class="dv-card-body">
+              <div class="dv-metric-row">
+                <span class="k">Sectors</span>
+                <span class="v">${dv.n_sectors} sectors, ${dv.timespan_days?.toFixed(0) || '?'} days</span>
+              </div>
+              <div class="dv-metric-row">
+                <span class="k">Period</span>
+                <span class="v">
+                  ${orig ? orig.period_days.toFixed(4) + 'd' : '?'}
+                  <span class="dv-arrow">→</span>
+                  ${dv.best_period?.toFixed(4) || '?'}d
+                </span>
+              </div>
+              <div class="dv-metric-row">
+                <span class="k">SDE</span>
+                <span class="v">
+                  ${orig ? orig.sde.toFixed(1) : '?'}
+                  <span class="dv-arrow">→</span>
+                  <span style="color:${(dv.best_sde||0) > (orig?.sde||0) ? 'var(--novel)' : 'var(--danger)'}">${dv.best_sde?.toFixed(1) || '?'}</span>
+                </span>
+              </div>
+              <div class="dv-metric-row">
+                <span class="k">Depth</span>
+                <span class="v">${dv.best_depth_ppt?.toFixed(3) || '?'} ppt</span>
+              </div>
+              <div class="dv-metric-row">
+                <span class="k">V-shape<span class="tip" data-tip="Transit shape metric: 0 = flat-bottomed (planet-like), 1 = V-shaped (eclipsing binary)">?</span></span>
+                <span class="v">${dv.vshape?.toFixed(3) || '?'}</span>
+              </div>
+              <div class="dv-metric-row">
+                <span class="k">Transits</span>
+                <span class="v">${dv.n_transits || '?'}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function showDvDetail(ticId) {
+      const c = DATA.candidates.find(x => x.tic_id === ticId);
+      if (c) showDetail(ticId, c.planet_num);
+    }
+
+    // ===== PLANET GALLERY =====
+    function renderGallery() {
+      const candidates = DATA.candidates
+        .filter(c => (c.grade === 'A' || c.grade === 'B') && c.rp_rearth != null)
+        .sort((a, b) => (a.rp_rearth || 999) - (b.rp_rearth || 999));
+
+      if (!candidates.length) {
+        document.getElementById('gallery-grid').innerHTML = '<p style="color:var(--text-muted)">No characterized candidates available yet.</p>';
+        return;
+      }
+
+      function typeClass(type) {
+        if (!type) return '';
+        const map = { 'Rocky/Terrestrial': 'type-rocky', 'Super-Earth': 'type-superearth', 'Sub-Neptune': 'type-subneptune', 'Neptune-class': 'type-neptune', 'Jupiter-class': 'type-jupiter' };
+        return map[type] || '';
+      }
+      function typeColor(type) {
+        const map = { 'Rocky/Terrestrial': '#34d399', 'Super-Earth': '#22d3ee', 'Sub-Neptune': '#818cf8', 'Neptune-class': '#fbbf24', 'Jupiter-class': '#f87171' };
+        return map[type] || 'var(--text-muted)';
+      }
+
+      document.getElementById('gallery-grid').innerHTML = candidates.map(c => `
+        <div class="planet-card ${typeClass(c.planet_type)}" onclick="showDetail(${c.tic_id}, ${c.planet_num})">
+          <div class="pc-tic">TIC ${c.tic_id}${c.planet_num > 1 ? ' p'+c.planet_num : ''}</div>
+          <div class="pc-radius ${radiusClass(c.rp_rearth)}">${c.rp_rearth.toFixed(1)}<span style="font-size:0.8rem;color:var(--text-muted)"> R&#8853;</span></div>
+          <div class="pc-radius-label">Estimated Radius</div>
+          <span class="pc-type" style="background:${typeColor(c.planet_type)}22;color:${typeColor(c.planet_type)};border:1px solid ${typeColor(c.planet_type)}40">${c.planet_type || 'Unknown'}</span>
+          <div class="pc-detail-row"><span class="k">Period</span><span class="v">${c.period_days.toFixed(4)} d</span></div>
+          ${c.stellar_teff != null ? `<div class="pc-detail-row"><span class="k">Star Teff</span><span class="v">${c.stellar_teff.toFixed(0)} K</span></div>` : ''}
+          ${c.teq_k != null ? `<div class="pc-detail-row"><span class="k">Planet Teq</span><span class="v">${c.teq_k.toFixed(0)} K</span></div>` : ''}
+          <div class="pc-detail-row"><span class="k">Grade</span><span class="v"><span class="badge grade-${c.grade.toLowerCase()}">${c.grade}</span></span></div>
+          <div class="pc-detail-row"><span class="k">SDE</span><span class="v" style="color:${c.sde >= 15 ? 'var(--novel)' : 'var(--text)'}">${c.sde.toFixed(1)}</span></div>
+        </div>
+      `).join('');
+    }
+
+    // ===== PIPELINE STATS =====
+    function renderPipeline() {
+      const injection = DATA.injection_recovery || {};
+      const recovery = DATA.known_planet_recovery || {};
+      const stats = DATA.stats || {};
+
+      let html = '';
+
+      // Injection Recovery
+      if (injection.detection_rate != null) {
+        const depthBars = (injection.depth_stats || []).map(d => {
+          const pct = (d.rate * 100).toFixed(0);
+          const barColor = d.rate >= 0.6 ? 'var(--novel)' : d.rate >= 0.4 ? 'var(--warning)' : 'var(--danger)';
+          return `<div class="depth-bar-row">
+            <span class="label">${d.depth_range_ppt} ppt</span>
+            <div class="bar-wrap"><div class="bar" style="width:${pct}%;background:${barColor}">${pct}%</div></div>
+            <span class="bar-val">${d.n_recovered}/${d.n_tested}</span>
+          </div>`;
+        }).join('');
+
+        html += `
+          <div class="pipeline-box">
+            <h3>Injection-Recovery Test<span class="tip" data-tip="Synthetic transit signals are injected into real light curves to measure the pipeline's ability to detect planets of different sizes">?</span></h3>
+            <div class="detail-grid" style="margin-bottom:1rem">
+              <div class="detail-item"><div class="label">Detection Rate</div><div class="val" style="color:var(--novel);font-size:1.3rem">${(injection.detection_rate * 100).toFixed(1)}%</div></div>
+              <div class="detail-item"><div class="label">False Positive Rate</div><div class="val" style="color:var(--danger);font-size:1.3rem">${(injection.false_positive_rate * 100).toFixed(1)}%</div></div>
+              <div class="detail-item"><div class="label">Injections Tested</div><div class="val">${injection.n_injected}</div></div>
+              <div class="detail-item"><div class="label">Null Tests</div><div class="val">${injection.n_null}</div></div>
+            </div>
+            <h3 style="font-size:0.7rem">Detection Rate by Depth</h3>
+            ${depthBars}
+          </div>
+        `;
+      }
+
+      // Known Planet Recovery
+      if (recovery.total_tested != null) {
+        const recPct = recovery.recovery_rate_pct;
+        html += `
+          <div class="pipeline-box">
+            <h3>Known Planet Recovery<span class="tip" data-tip="Tests whether the pipeline can independently rediscover known confirmed planets and TOI entries">?</span></h3>
+            <div class="detail-grid">
+              <div class="detail-item"><div class="label">Recovery Rate</div><div class="val" style="color:var(--accent);font-size:1.3rem">${recPct.toFixed(1)}%</div></div>
+              <div class="detail-item"><div class="label">Recovered</div><div class="val">${recovery.recovered} / ${recovery.total_tested}</div></div>
+              <div class="detail-item"><div class="label">TICs Processed</div><div class="val">${recovery.n_processed_tics?.toLocaleString() || '?'}</div></div>
+            </div>
+            <p style="font-size:0.75rem;color:var(--text-dim);margin-top:0.75rem">
+              Recovery rate reflects pipeline sensitivity to known transiting planets in the processed target list.
+              Missed detections may be due to shallow transits, few available transits, or stellar variability.
+            </p>
+          </div>
+        `;
+      }
+
+      // Pipeline Summary
+      html += `
+        <div class="pipeline-box">
+          <h3>Pipeline Summary</h3>
+          <div class="detail-grid">
+            <div class="detail-item"><div class="label">Targets Processed</div><div class="val">${stats.targets_processed?.toLocaleString() || '0'}</div></div>
+            <div class="detail-item"><div class="label">Candidates Found</div><div class="val">${stats.candidates_found || '0'}</div></div>
+            <div class="detail-item"><div class="label">No Signal</div><div class="val">${stats.no_signal?.toLocaleString() || '0'}</div></div>
+            <div class="detail-item"><div class="label">Errors</div><div class="val">${stats.errors || '0'}</div></div>
+            <div class="detail-item"><div class="label">Rocky Planets</div><div class="val" style="color:#a78bfa">${stats.rocky_planets || '0'}</div></div>
+            <div class="detail-item"><div class="label">Multi-Planet Systems</div><div class="val" style="color:#f472b6">${stats.multi_planet_systems || '0'}</div></div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('pipeline-grid').innerHTML = html;
+    }
+
+    // ===== GUIDE =====
+    function renderGuide() {
+      document.getElementById('guide-content').innerHTML = `
+        <h2>How It Works</h2>
+        <p>This pipeline searches for undiscovered exoplanets in publicly available NASA TESS (Transiting Exoplanet Survey Satellite) data. It uses the <strong>Transit Least Squares</strong> (TLS) algorithm to detect periodic brightness dips caused by planets crossing in front of their host stars.</p>
+
+        <h3>Detection Pipeline</h3>
+        <ul>
+          <li><strong>Download</strong> — TESS light curves from the MAST archive via <code>lightkurve</code>. Prefers SPOC 2-minute cadence data.</li>
+          <li><strong>Clean</strong> — Remove NaNs, 5σ outlier rejection, normalize flux, flatten stellar variability with a Savitzky-Golay filter.</li>
+          <li><strong>Detect</strong> — Multi-planet TLS search: find the strongest periodic signal, mask it, repeat up to 5 times. Checks for harmonic/duplicate periods.</li>
+          <li><strong>Vet</strong> — Grade each detection (A/B/C/EB) based on transit shape, depth, secondary eclipses, and statistical significance.</li>
+          <li><strong>Cross-reference</strong> — Match against the NASA TOI (TESS Objects of Interest) catalog to identify known planets vs novel candidates.</li>
+          <li><strong>Deep Vet</strong> — For top candidates, download ALL available TESS sectors and rerun TLS. If the signal strengthens with more data, it's more likely real.</li>
+        </ul>
+
+        <h3>Reading the Dashboard</h3>
+        <ul>
+          <li><strong>Dashboard</strong> — Overview stats and top Grade A candidates. Click any row to see full details including diagnostic plots.</li>
+          <li><strong>Candidates</strong> — Full searchable, sortable, filterable table of all detections. Filter by grade, novelty status, or search by TIC ID.</li>
+          <li><strong>Deep Vet</strong> — Results of multi-sector validation. Cards show how each candidate's signal changed with more data. Green SDE = signal strengthened.</li>
+          <li><strong>Guide</strong> — You're here.</li>
+        </ul>
+
+        <h3>Candidate Grades</h3>
+        <table class="guide-table">
+          <thead>
+            <tr><th>Grade</th><th>Meaning</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="badge grade-a">A</span></td><td>Strong signal, no red flags. Passes all quality checks.</td><td>Priority for deep vetting</td></tr>
+            <tr><td><span class="badge grade-b">B</span></td><td>Promising but marginal — low SDE, few transits, or suspicious depth.</td><td>Needs multi-sector stacking</td></tr>
+            <tr><td><span class="badge grade-c">C</span></td><td>Likely noise — multiple quality flags.</td><td>Low priority</td></tr>
+            <tr><td><span class="badge grade-eb">EB</span></td><td>Eclipsing binary — deep transit, V-shaped, or secondary eclipse detected.</td><td>Rejected</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Key Metrics</h3>
+        <table class="guide-table">
+          <thead>
+            <tr><th>Metric</th><th>What It Measures</th><th>Good Values</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>SDE</td><td>Signal Detection Efficiency — statistical significance of the periodic signal</td><td>≥ 7.0 (threshold), > 15 is strong</td></tr>
+            <tr><td>SNR</td><td>Signal-to-Noise Ratio of the transit dip</td><td>≥ 5.0</td></tr>
+            <tr><td>Depth (ppt)</td><td>How much the star dims during transit. 1 ppt = 0.1% dimming.</td><td>0.1–3.0 ppt (planet-like). > 5 ppt = likely EB</td></tr>
+            <tr><td>V-shape</td><td>Transit shape: 0 = flat-bottomed (planet), 1 = V-shaped (EB)</td><td>< 0.5 is planet-like</td></tr>
+            <tr><td>Secondary Eclipse</td><td>Dip at phase 0.5 — indicates light from companion, i.e. eclipsing binary</td><td>< 0.3 ppt (ideally ~0)</td></tr>
+            <tr><td>Period</td><td>Orbital period of the detected signal</td><td>0.5–30 days (TESS-detectable range)</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Deep Vetting Verdicts</h3>
+        <table class="guide-table">
+          <thead>
+            <tr><th>Verdict</th><th>Meaning</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="badge confirmed">Confirmed</span></td><td>Period matches within 2%, SDE above threshold. Signal is consistent across multiple sectors.</td></tr>
+            <tr><td><span class="badge refined">Refined</span></td><td>Period shifted 2–10% — single-sector period was approximate, but the signal strengthened. Still a viable candidate.</td></tr>
+            <tr><td><span class="badge dead">Not Recovered</span></td><td>Original signal not found in multi-sector data. Was likely noise or a systematic artifact.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>What Makes a Good Candidate?</h3>
+        <p>The ideal exoplanet candidate has:</p>
+        <ul>
+          <li><strong>Shallow depth</strong> (< 1 ppt) — deep transits are almost always eclipsing binaries</li>
+          <li><strong>Flat-bottomed transit</strong> (V-shape < 0.3) — planets produce flat bottoms, EBs produce V-shapes</li>
+          <li><strong>No secondary eclipse</strong> — a dip at phase 0.5 means the "planet" is glowing, i.e. it's a star</li>
+          <li><strong>Signal strengthens with more data</strong> — real signals get stronger with more transits</li>
+          <li><strong>Multiple planets in same system</strong> — false positives rarely mimic multi-planet systems</li>
+        </ul>
+
+        <h3>Data Sources & Attribution</h3>
+        <ul>
+          <li><strong>TESS data:</strong> Collected by the TESS mission, publicly available from the Mikulski Archive for Space Telescopes (MAST). Cite: Ricker et al. 2015.</li>
+          <li><strong>lightkurve:</strong> Python package for Kepler and TESS data. Cite: Lightkurve Collaboration 2018.</li>
+          <li><strong>Transit Least Squares:</strong> Detection algorithm. Cite: Hippke & Heller 2019.</li>
+          <li><strong>TOI Catalog:</strong> NASA Exoplanet Archive TAP service.</li>
+        </ul>
+
+        <h3>Running the Pipeline</h3>
+        <ul>
+          <li><code>python pipeline.py --sector 1 --limit 50</code> — Process 50 targets from TESS sector 1</li>
+          <li><code>python pipeline.py --tic 261136679</code> — Process a specific star</li>
+          <li><code>python pipeline.py --status</code> — View current results summary</li>
+          <li><code>python pipeline.py --export-web</code> — Update this dashboard's data</li>
+          <li><code>python deep_vet.py --tic 349059448 --period 0.679</code> — Deep vet a candidate</li>
+        </ul>
+      `;
+    }
+
+    // ===== INIT =====
+    loadData();
+  </script>
+</body>
+</html>
