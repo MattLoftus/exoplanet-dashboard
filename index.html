@@ -1363,26 +1363,35 @@
     // ===== GUIDE =====
     function renderGuide() {
       document.getElementById('guide-content').innerHTML = `
-        <h2>How It Works</h2>
-        <p>This pipeline searches for undiscovered exoplanets in publicly available NASA TESS (Transiting Exoplanet Survey Satellite) data. It uses the <strong>Transit Least Squares</strong> (TLS) algorithm to detect periodic brightness dips caused by planets crossing in front of their host stars.</p>
+        <h2>SCOUT — Systematic Census Of Undiscovered Transits</h2>
+        <p>SCOUT is an automated pipeline searching for undiscovered exoplanets in publicly available NASA TESS (Transiting Exoplanet Survey Satellite) data. It runs nightly, processing new sectors and vetting candidates through an 8-layer gauntlet designed to eliminate the false positives that dominate transit searches.</p>
 
-        <h3>Detection Pipeline</h3>
+        <h3>Detection Modes</h3>
         <ul>
-          <li><strong>Download</strong> — TESS light curves from the MAST archive via <code>lightkurve</code>. Prefers SPOC 2-minute cadence data.</li>
-          <li><strong>Clean</strong> — Remove NaNs, 5σ outlier rejection, normalize flux, flatten stellar variability with a Savitzky-Golay filter.</li>
-          <li><strong>Detect</strong> — Multi-planet TLS search: find the strongest periodic signal, mask it, repeat up to 5 times. Checks for harmonic/duplicate periods.</li>
-          <li><strong>Vet</strong> — Grade each detection (A/B/C/EB) based on transit shape, depth, secondary eclipses, and statistical significance.</li>
-          <li><strong>Cross-reference</strong> — Match against the NASA TOI (TESS Objects of Interest) catalog to identify known planets vs novel candidates.</li>
-          <li><strong>Deep Vet</strong> — For top candidates, download ALL available TESS sectors and rerun TLS. If the signal strengthens with more data, it's more likely real.</li>
+          <li><strong>Standard sweep</strong> — TLS transit search on SPOC 2-minute cadence light curves. 100 brightest targets per sector.</li>
+          <li><strong>M-dwarf sweep</strong> — Targets cool stars (Teff &lt; 4000K) specifically. Smaller stars produce deeper transits from smaller planets — the most scientifically valuable targets.</li>
+          <li><strong>Multi-sector stacking</strong> — Stitches 2–3 adjacent sectors before running TLS. Pushes detection sensitivity below 500 ppm where single-sector completely fails.</li>
+          <li><strong>FFI search</strong> — Searches Full Frame Image targets not in the SPOC catalog. Millions of unsearched stars where undiscovered planets are most likely to hide.</li>
+          <li><strong>Grade B deep-vet</strong> — Systematically re-examines marginal candidates with all available multi-sector data. Some Grade B signals strengthen to definitive detections.</li>
         </ul>
 
-        <h3>Reading the Dashboard</h3>
-        <ul>
-          <li><strong>Dashboard</strong> — Overview stats and top Grade A candidates. Click any row to see full details including diagnostic plots.</li>
-          <li><strong>Candidates</strong> — Full searchable, sortable, filterable table of all detections. Filter by grade, novelty status, or search by TIC ID.</li>
-          <li><strong>Deep Vet</strong> — Results of multi-sector validation. Cards show how each candidate's signal changed with more data. Green SDE = signal strengthened.</li>
-          <li><strong>Guide</strong> — You're here.</li>
-        </ul>
+        <h3>Vetting Gauntlet</h3>
+        <p>Every candidate must survive all 8 layers. A single failure demotes or eliminates it.</p>
+        <table class="guide-table">
+          <thead>
+            <tr><th>#</th><th>Check</th><th>What It Catches</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td><strong>Gaia RUWE</strong></td><td>Astrometric binaries (RUWE &gt; 1.4). Eliminated 8 of our first 14 top candidates in one query.</td></tr>
+            <tr><td>2</td><td><strong>Transit shape</strong></td><td>V-shaped transits (eclipsing binaries have V-shapes, planets have flat bottoms).</td></tr>
+            <tr><td>3</td><td><strong>Secondary eclipse</strong></td><td>Dip at orbital phase 0.5 — the companion is glowing, meaning it's a star, not a planet.</td></tr>
+            <tr><td>4</td><td><strong>Odd/even depth</strong></td><td>Alternating transit depths indicate the true period is 2x detected — a background eclipsing binary.</td></tr>
+            <tr><td>5</td><td><strong>Stellar variability</strong></td><td>Lomb-Scargle periodogram on out-of-transit data. If the star's rotation period matches the transit period, the "transit" is likely starspot modulation.</td></tr>
+            <tr><td>6</td><td><strong>Neighbor correlation</strong></td><td>Checks if nearby stars (within ~120") show the same signal. If they do, it's contamination from a background source, not a planet on the target.</td></tr>
+            <tr><td>7</td><td><strong>Depth consistency</strong></td><td>Transit depth must be stable across independent epochs spanning years. Depth varying &gt; 3σ indicates a blended eclipsing binary.</td></tr>
+            <tr><td>8</td><td><strong>Multi-sector persistence</strong></td><td>Signal must appear in independent time windows years apart. Sector-dependent signals are systematics, not planets.</td></tr>
+          </tbody>
+        </table>
 
         <h3>Candidate Grades</h3>
         <table class="guide-table">
@@ -1390,10 +1399,10 @@
             <tr><th>Grade</th><th>Meaning</th><th>Action</th></tr>
           </thead>
           <tbody>
-            <tr><td><span class="badge grade-a">A</span></td><td>Strong signal, no red flags. Passes all quality checks.</td><td>Priority for deep vetting</td></tr>
-            <tr><td><span class="badge grade-b">B</span></td><td>Promising but marginal — low SDE, few transits, or suspicious depth.</td><td>Needs multi-sector stacking</td></tr>
+            <tr><td><span class="badge grade-a">A</span></td><td>Strong signal, RUWE-clean, no red flags.</td><td>Full gauntlet: variability + neighbor + deep vet</td></tr>
+            <tr><td><span class="badge grade-b">B</span></td><td>Promising but marginal, or Gaia binary warning (RUWE &gt; 1.4).</td><td>Multi-sector stacking to strengthen or eliminate</td></tr>
             <tr><td><span class="badge grade-c">C</span></td><td>Likely noise — multiple quality flags.</td><td>Low priority</td></tr>
-            <tr><td><span class="badge grade-eb">EB</span></td><td>Eclipsing binary — deep transit, V-shaped, or secondary eclipse detected.</td><td>Rejected</td></tr>
+            <tr><td><span class="badge grade-eb">EB</span></td><td>Eclipsing binary — deep transit, V-shaped, secondary eclipse, or confirmed Gaia binary.</td><td>Rejected</td></tr>
           </tbody>
         </table>
 
@@ -1403,11 +1412,12 @@
             <tr><th>Metric</th><th>What It Measures</th><th>Good Values</th></tr>
           </thead>
           <tbody>
-            <tr><td>SDE</td><td>Signal Detection Efficiency — statistical significance of the periodic signal</td><td>≥ 7.0 (threshold), > 15 is strong</td></tr>
+            <tr><td>SDE</td><td>Signal Detection Efficiency — statistical significance of the periodic signal</td><td>≥ 7.0 (threshold), &gt; 15 is strong</td></tr>
             <tr><td>SNR</td><td>Signal-to-Noise Ratio of the transit dip</td><td>≥ 5.0</td></tr>
-            <tr><td>Depth (ppt)</td><td>How much the star dims during transit. 1 ppt = 0.1% dimming.</td><td>0.1–3.0 ppt (planet-like). > 5 ppt = likely EB</td></tr>
-            <tr><td>V-shape</td><td>Transit shape: 0 = flat-bottomed (planet), 1 = V-shaped (EB)</td><td>< 0.5 is planet-like</td></tr>
-            <tr><td>Secondary Eclipse</td><td>Dip at phase 0.5 — indicates light from companion, i.e. eclipsing binary</td><td>< 0.3 ppt (ideally ~0)</td></tr>
+            <tr><td>Depth (ppt)</td><td>How much the star dims during transit. 1 ppt = 0.1% dimming.</td><td>0.1–3.0 ppt (planet-like). &gt; 5 ppt = likely EB</td></tr>
+            <tr><td>RUWE</td><td>Gaia astrometric quality. High values indicate unresolved binary companion.</td><td>&lt; 1.4 is clean</td></tr>
+            <tr><td>V-shape</td><td>Transit shape: 0 = flat-bottomed (planet), 1 = V-shaped (EB)</td><td>&lt; 0.5 is planet-like</td></tr>
+            <tr><td>Secondary Eclipse</td><td>Dip at phase 0.5 — indicates light from companion</td><td>&lt; 0.3 ppt (ideally ~0)</td></tr>
             <tr><td>Period</td><td>Orbital period of the detected signal</td><td>0.5–30 days (TESS-detectable range)</td></tr>
           </tbody>
         </table>
@@ -1419,36 +1429,44 @@
           </thead>
           <tbody>
             <tr><td><span class="badge confirmed">Confirmed</span></td><td>Period matches within 2%, SDE above threshold. Signal is consistent across multiple sectors.</td></tr>
-            <tr><td><span class="badge refined">Refined</span></td><td>Period shifted 2–10% — single-sector period was approximate, but the signal strengthened. Still a viable candidate.</td></tr>
+            <tr><td><span class="badge refined">Refined</span></td><td>Period shifted 2–10% — single-sector period was approximate, but the signal strengthened.</td></tr>
             <tr><td><span class="badge dead">Not Recovered</span></td><td>Original signal not found in multi-sector data. Was likely noise or a systematic artifact.</td></tr>
           </tbody>
         </table>
 
-        <h3>What Makes a Good Candidate?</h3>
+        <h3>What Survives the Gauntlet?</h3>
         <p>The ideal exoplanet candidate has:</p>
         <ul>
-          <li><strong>Shallow depth</strong> (< 1 ppt) — deep transits are almost always eclipsing binaries</li>
-          <li><strong>Flat-bottomed transit</strong> (V-shape < 0.3) — planets produce flat bottoms, EBs produce V-shapes</li>
-          <li><strong>No secondary eclipse</strong> — a dip at phase 0.5 means the "planet" is glowing, i.e. it's a star</li>
+          <li><strong>RUWE &lt; 1.4</strong> — not an astrometric binary</li>
+          <li><strong>Shallow depth</strong> (&lt; 1 ppt) — deep transits are almost always eclipsing binaries</li>
+          <li><strong>Flat-bottomed transit</strong> (V-shape &lt; 0.3) — planets produce flat bottoms, EBs produce V-shapes</li>
+          <li><strong>No secondary eclipse</strong> — a dip at phase 0.5 means the companion is glowing</li>
+          <li><strong>No variability period match</strong> — stellar rotation shouldn't match the transit period</li>
+          <li><strong>No neighbor contamination</strong> — signal must be unique to the target star</li>
+          <li><strong>Consistent depth across epochs</strong> — a real planet blocks the same fraction of starlight every time</li>
           <li><strong>Signal strengthens with more data</strong> — real signals get stronger with more transits</li>
-          <li><strong>Multiple planets in same system</strong> — false positives rarely mimic multi-planet systems</li>
+        </ul>
+
+        <h3>Nightly Pipeline</h3>
+        <p>SCOUT runs automatically at midnight, processing 3 new sectors per night:</p>
+        <ul>
+          <li><strong>Phase 1</strong> — Standard sweep (100 targets/sector)</li>
+          <li><strong>Phase 2</strong> — M-dwarf sweep (50 M-dwarfs/sector)</li>
+          <li><strong>Phase 3</strong> — Multi-sector stacking (targets in all 3 sectors)</li>
+          <li><strong>Phase 4</strong> — FFI search (30 non-SPOC targets/sector)</li>
+          <li><strong>Phase 5</strong> — Grade B deep-vet (10 from backlog)</li>
+          <li><strong>Phase 6</strong> — Auto deep-vet new Grade A candidates</li>
+          <li><strong>Phase 7</strong> — Dashboard export &amp; deploy</li>
         </ul>
 
         <h3>Data Sources & Attribution</h3>
         <ul>
-          <li><strong>TESS data:</strong> Collected by the TESS mission, publicly available from the Mikulski Archive for Space Telescopes (MAST). Cite: Ricker et al. 2015.</li>
+          <li><strong>TESS data:</strong> Collected by the TESS mission, publicly available from MAST. Cite: Ricker et al. 2015.</li>
+          <li><strong>Gaia DR3:</strong> Astrometric data for binary identification. ESA Gaia mission.</li>
           <li><strong>lightkurve:</strong> Python package for Kepler and TESS data. Cite: Lightkurve Collaboration 2018.</li>
-          <li><strong>Transit Least Squares:</strong> Detection algorithm. Cite: Hippke & Heller 2019.</li>
+          <li><strong>Transit Least Squares:</strong> Detection algorithm. Cite: Hippke &amp; Heller 2019.</li>
+          <li><strong>batman:</strong> Transit model fitting. Cite: Kreidberg 2015.</li>
           <li><strong>TOI Catalog:</strong> NASA Exoplanet Archive TAP service.</li>
-        </ul>
-
-        <h3>Running the Pipeline</h3>
-        <ul>
-          <li><code>python pipeline.py --sector 1 --limit 50</code> — Process 50 targets from TESS sector 1</li>
-          <li><code>python pipeline.py --tic 261136679</code> — Process a specific star</li>
-          <li><code>python pipeline.py --status</code> — View current results summary</li>
-          <li><code>python pipeline.py --export-web</code> — Update this dashboard's data</li>
-          <li><code>python deep_vet.py --tic 349059448 --period 0.679</code> — Deep vet a candidate</li>
         </ul>
       `;
     }
