@@ -1448,15 +1448,26 @@
         </ul>
 
         <h3>Nightly Pipeline</h3>
-        <p>SCOUT runs automatically at midnight, processing 3 new sectors per night:</p>
+        <p>The pipeline runs automatically at midnight, processing 3 new sectors per night across 10 search strategies:</p>
+
+        <h4>Nightly (every run)</h4>
         <ul>
-          <li><strong>Phase 1</strong> — Standard sweep (100 targets/sector)</li>
-          <li><strong>Phase 2</strong> — M-dwarf sweep (50 M-dwarfs/sector)</li>
-          <li><strong>Phase 3</strong> — Multi-sector stacking (targets in all 3 sectors)</li>
-          <li><strong>Phase 4</strong> — FFI search (30 non-SPOC targets/sector)</li>
-          <li><strong>Phase 5</strong> — Grade B deep-vet (10 from backlog)</li>
-          <li><strong>Phase 6</strong> — Auto deep-vet new Grade A candidates</li>
-          <li><strong>Phase 7</strong> — Dashboard export &amp; deploy</li>
+          <li><strong>Standard sweep</strong> — TLS on 100 SPOC targets/sector</li>
+          <li><strong>M-dwarf sweep</strong> — 50 cool stars/sector (Teff &lt; 4000K)</li>
+          <li><strong>Multi-sector stacking</strong> — 20 targets with combined 3-sector data</li>
+          <li><strong>FFI search</strong> — 15 non-SPOC targets/sector from Full Frame Images</li>
+          <li><strong>Grade B deep-vet</strong> — 5 marginal candidates re-examined with all sectors</li>
+          <li><strong>TOI gap search</strong> — 20 RUWE-clean cool stars TESS observed but nobody flagged</li>
+          <li><strong>Single-transit search</strong> — BLS for long-period planets (P &gt; 10d) with 1 transit</li>
+          <li><strong>Auto deep-vet</strong> — any new Grade A candidates</li>
+          <li><strong>Dashboard deploy</strong> — push updated data to this site</li>
+        </ul>
+
+        <h4>Weekly</h4>
+        <ul>
+          <li><strong>Monday — Overlap stacking</strong> — Stars observed in both primary &amp; extended TESS missions, stacked for maximum sensitivity</li>
+          <li><strong>Tuesday — TTV mining</strong> — Transit timing variations in known multi-planet systems to reveal unseen companions</li>
+          <li><strong>Saturday — Circumbinary search</strong> — Subtract EB model from eclipsing binaries, search residuals for planet transits</li>
         </ul>
 
         <h3>Data Sources & Attribution</h3>
