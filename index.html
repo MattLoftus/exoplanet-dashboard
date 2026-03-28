@@ -132,7 +132,7 @@
 
     /* ===== LAYOUT ===== */
     .container {
-      max-width: 1400px;
+      max-width: 100%;
       margin: 0 auto;
       padding: 1.5rem 2rem 3rem;
     }
@@ -196,6 +196,21 @@
       font-size: 0.7rem;
       color: var(--text-dim);
       margin-top: 0.15rem;
+    }
+    .stat-card .detail {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-top: 0.5rem;
+      max-height: 0;
+      margin-top: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.25s ease, opacity 0.2s ease, margin-top 0.25s ease;
+    }
+    .stat-card:hover .detail {
+      max-height: 150px;
+      opacity: 1;
     }
 
     /* ===== SECTION HEADERS ===== */
@@ -838,7 +853,8 @@
       const gradeA = candidates.filter(c => c.grade === 'A');
       const gradeB = candidates.filter(c => c.grade === 'B');
       const gradeEB = candidates.filter(c => c.grade === 'EB');
-      const novel = candidates.filter(c => !c.is_known);
+      const novelPlanetLike = candidates.filter(c => !c.is_known && (c.grade === 'A' || c.grade === 'B'));
+      const ctoisSubmitted = candidates.filter(c => c.matching_toi && String(c.matching_toi).includes('loftus'));
       const dvConfirmed = (deep_vets || []).filter(d => d.verdict === 'CONFIRMED' || d.verdict === 'REFINED');
       const rocky = candidates.filter(c => c.planet_type === 'Rocky/Terrestrial');
       const multiPlanet = stats.multi_planet_systems || 0;
@@ -848,41 +864,49 @@
           <div class="label">Targets Searched</div>
           <div class="value">${stats.targets_processed.toLocaleString()}</div>
           <div class="sub">${stats.no_signal.toLocaleString()} no signal</div>
+          <div class="detail">Unique stars processed via Transit Least Squares. Each gets a full periodic dimming search.</div>
         </div>
         <div class="stat-card novel" onclick="filterFromCard('A')">
           <div class="label">Grade A</div>
           <div class="value">${gradeA.length}</div>
           <div class="sub">Strong, no red flags</div>
+          <div class="detail">Passed all automated checks: SDE ≥ 7, SNR ≥ 5, reasonable depth/period, consistent odd/even transits, no V-shaped eclipses.</div>
         </div>
         <div class="stat-card warning" onclick="filterFromCard('B')">
           <div class="label">Grade B</div>
           <div class="value">${gradeB.length}</div>
           <div class="sub">Needs more data</div>
+          <div class="detail">Signal detected but with at least one flag: marginal SDE, few transits, or minor vetting concerns.</div>
         </div>
         <div class="stat-card rocky" onclick="filterFromCard('rocky')">
           <div class="label">Rocky Planets</div>
           <div class="value">${rocky.length}</div>
           <div class="sub">R &lt; 1.5 R&#8853;</div>
+          <div class="detail">Estimated radius below 1.5 Earth radii based on transit depth and host star size from TIC.</div>
         </div>
         <div class="stat-card multi" onclick="filterFromCard('multi')">
           <div class="label">Multi-Planet</div>
           <div class="value">${multiPlanet}</div>
           <div class="sub">Systems with 2+ signals</div>
+          <div class="detail">Stars where subtracting the strongest signal revealed a second periodic dip. Near-resonant period ratios increase credibility.</div>
         </div>
         <div class="stat-card danger" onclick="filterFromCard('EB')">
           <div class="label">Eclipsing Binaries</div>
           <div class="value">${gradeEB.length}</div>
           <div class="sub">Filtered out</div>
+          <div class="detail">Two stars eclipsing each other, not planets. Identified by V-shaped transits, secondary eclipses, large depths, or odd/even depth mismatches.</div>
         </div>
         <div class="stat-card cyan" onclick="showTab('deepvet')">
           <div class="label">Deep Vet Survivors</div>
           <div class="value">${dvConfirmed.length}</div>
           <div class="sub">of ${(deep_vets||[]).length} tested</div>
+          <div class="detail">Signal held steady when stacking all available TESS sectors. Not all survivors pass later checks like epoch tests or centroid analysis.</div>
         </div>
-        <div class="stat-card muted" onclick="filterFromCard('novel')">
-          <div class="label">Novel Candidates</div>
-          <div class="value">${novel.length}</div>
-          <div class="sub">Not in TOI catalog</div>
+        <div class="stat-card novel" onclick="filterFromCard('novel')">
+          <div class="label">Novel Planet-Like</div>
+          <div class="value">${novelPlanetLike.length}</div>
+          <div class="sub">Grade A/B, not in catalogs</div>
+          <div class="detail">Not in the NASA TOI catalog or ExoFOP CTOI list. Potential new discoveries pending deep vetting and epoch confirmation.</div>
         </div>
       `;
 
@@ -941,7 +965,7 @@
         B: candidates.filter(c => c.grade === 'B').length,
         EB: candidates.filter(c => c.grade === 'EB').length,
         C: candidates.filter(c => c.grade === 'C').length,
-        novel: candidates.filter(c => !c.is_known).length,
+        novel: candidates.filter(c => !c.is_known && (c.grade === 'A' || c.grade === 'B')).length,
         known: candidates.filter(c => c.is_known).length,
         rocky: candidates.filter(c => c.planet_type === 'Rocky/Terrestrial').length,
         multi: candidates.filter(c => c.is_multi_planet).length,
@@ -999,7 +1023,7 @@
       let filtered = [...DATA.candidates];
 
       // Filter
-      if (currentFilter === 'novel') filtered = filtered.filter(c => !c.is_known);
+      if (currentFilter === 'novel') filtered = filtered.filter(c => !c.is_known && (c.grade === 'A' || c.grade === 'B'));
       else if (currentFilter === 'known') filtered = filtered.filter(c => c.is_known);
       else if (currentFilter === 'rocky') filtered = filtered.filter(c => c.planet_type === 'Rocky/Terrestrial');
       else if (currentFilter === 'multi') filtered = filtered.filter(c => c.is_multi_planet);
