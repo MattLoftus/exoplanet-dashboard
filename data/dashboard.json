@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-03-28T09:11:29.686655",
+  "generated_at": "2026-03-29T05:41:36.443516",
   "stats": {
-    "targets_processed": 6787,
-    "candidates_found": 819,
-    "errors": 245,
-    "no_signal": 5589,
+    "targets_processed": 7257,
+    "candidates_found": 874,
+    "errors": 264,
+    "no_signal": 5901,
     "rocky_planets": 31,
     "multi_planet_systems": 2
   },
@@ -51422,6 +51422,3184 @@
       "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_219795383_p4_candidate.png",
       "n_transit_times": 3,
       "plot_filename": "TIC_219795383_p4_candidate.png"
+    },
+    {
+      "tic_id": 453330812,
+      "planet_num": 1,
+      "period_days": 2.1038999013803963,
+      "t0_btjd": 2937.635828116774,
+      "depth_ppt": 3.7241589985119727,
+      "duration_hours": 1.6855752320929072,
+      "sde": 18.115247791241806,
+      "snr": 69.18858010749665,
+      "n_transits": 12,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "B",
+        "reason": "Suspicious depth (possible EB): suspicious_depth (3.7ppt > 3.0ppt)",
+        "flags": [
+          "suspicious_depth (3.7ppt > 3.0ppt)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 0.9328711032867432,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.24031007751937983,
+          "secondary_eclipse_depth": 5.99598262143175e-05,
+          "data_vshape": 0.0,
+          "individual_transit_snr": 22.227486222551487,
+          "depth_scatter_ratio": 3.6892360529598096,
+          "odd_even_mismatch": 2.339529707295406,
+          "odd_even_ratio": 1.000705028824874
+        }
+      },
+      "grade": "B",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T00:06:33.781217",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_453330812_candidate.png",
+      "n_transit_times": 12,
+      "plot_filename": "TIC_453330812_candidate.png"
+    },
+    {
+      "tic_id": 232629077,
+      "planet_num": 1,
+      "period_days": 3.653158489312481,
+      "t0_btjd": 2941.6912279845847,
+      "depth_ppt": 49.75709317263022,
+      "duration_hours": 1.024581064839968,
+      "sde": 36.73490087486402,
+      "snr": 163.5697564239491,
+      "n_transits": 6,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: gaia_confirmed_binary (RUWE=1.27, NSS=2); deep_transit (49.8ppt > 5.0ppt); data_v_shaped (0.75 > 0.7)",
+        "flags": [
+          "gaia_confirmed_binary (RUWE=1.27, NSS=2)",
+          "deep_transit (49.8ppt > 5.0ppt)",
+          "data_v_shaped (0.75 > 0.7)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.2685303688049316,
+            "non_single_star": 2,
+            "binary_flag": "confirmed_binary"
+          },
+          "vshape": 0.24096385542168675,
+          "secondary_eclipse_depth": 2.3541449303499107e-05,
+          "data_vshape": 0.75,
+          "individual_transit_snr": 549.4946378348736,
+          "depth_scatter_ratio": 111.2943255375313,
+          "odd_even_mismatch": 0.5361569760035964,
+          "odd_even_ratio": 0.9988548226347378
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T00:11:34.585371",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_232629077_candidate.png",
+      "n_transit_times": 6,
+      "plot_filename": "TIC_232629077_candidate.png"
+    },
+    {
+      "tic_id": 154568099,
+      "planet_num": 1,
+      "period_days": 1.0636173446228798,
+      "t0_btjd": 2937.523248138307,
+      "depth_ppt": 9.898255750988794,
+      "duration_hours": 0.42325513960418976,
+      "sde": 7.246718342579704,
+      "snr": 18.381474225411935,
+      "n_transits": 24,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: deep_transit (9.9ppt > 5.0ppt); data_v_shaped (0.84 > 0.7)",
+        "flags": [
+          "deep_transit (9.9ppt > 5.0ppt)",
+          "data_v_shaped (0.84 > 0.7)",
+          "marginal_sde (7.2)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 0.9563826322555542,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.2362204724409449,
+          "secondary_eclipse_depth": -2.1939443168639272e-05,
+          "data_vshape": 0.84,
+          "individual_transit_snr": 3.8945828955835844,
+          "depth_scatter_ratio": 1.3007987047351617,
+          "odd_even_mismatch": 1.4770554892720151,
+          "odd_even_ratio": 0.998721611515464
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T00:14:43.722600",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_154568099_candidate.png",
+      "n_transit_times": 24,
+      "plot_filename": "TIC_154568099_candidate.png"
+    },
+    {
+      "tic_id": 461512871,
+      "planet_num": 1,
+      "period_days": 1.133918881920257,
+      "t0_btjd": 2940.8454227922284,
+      "depth_ppt": 2.2463664661606098,
+      "duration_hours": 1.311197567093204,
+      "sde": 7.845504492932157,
+      "snr": 18.932642186499454,
+      "n_transits": 20,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: secondary_eclipse (1.58ppt); data_v_shaped (0.80 > 0.7)",
+        "flags": [
+          "secondary_eclipse (1.58ppt)",
+          "data_v_shaped (0.80 > 0.7)",
+          "depth_below_scatter (ratio=0.86)",
+          "marginal_sde (7.8)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.1356836557388306,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.24035608308605338,
+          "secondary_eclipse_depth": 0.0015790338347081434,
+          "data_vshape": 0.8,
+          "individual_transit_snr": 4.641849536268842,
+          "depth_scatter_ratio": 0.8555255828696418,
+          "odd_even_mismatch": 1.247297490783931,
+          "odd_even_ratio": 0.9996815303057291
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T00:22:05.847430",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_461512871_candidate.png",
+      "n_transit_times": 20,
+      "plot_filename": "TIC_461512871_candidate.png"
+    },
+    {
+      "tic_id": 333791520,
+      "planet_num": 1,
+      "period_days": 5.048595592910538,
+      "t0_btjd": 2943.132388196024,
+      "depth_ppt": 39.08599518959222,
+      "duration_hours": 1.399269849196227,
+      "sde": 18.428136505977154,
+      "snr": 55.889529748315475,
+      "n_transits": 4,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: deep_transit (39.1ppt > 5.0ppt); secondary_eclipse (0.39ppt)",
+        "flags": [
+          "deep_transit (39.1ppt > 5.0ppt)",
+          "secondary_eclipse (0.39ppt)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 0.9694984555244446,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.24390243902439024,
+          "secondary_eclipse_depth": 0.0003944649774753062,
+          "data_vshape": 0.33333333333333337,
+          "individual_transit_snr": 39.39946793508305,
+          "depth_scatter_ratio": 6.646840205821794,
+          "odd_even_mismatch": 1.9022287098094186,
+          "odd_even_ratio": 0.9921130017329186
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T00:26:35.831218",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_333791520_candidate.png",
+      "n_transit_times": 4,
+      "plot_filename": "TIC_333791520_candidate.png"
+    },
+    {
+      "tic_id": 333791520,
+      "planet_num": 2,
+      "period_days": 0.9461439748986955,
+      "t0_btjd": 2939.616525387442,
+      "depth_ppt": 3.225017836201549,
+      "duration_hours": 0.36715129122657386,
+      "sde": 17.02047094477407,
+      "snr": 9.254376472415696,
+      "n_transits": 25,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.89 > 0.7)",
+        "flags": [
+          "suspicious_depth (3.2ppt > 3.0ppt)",
+          "data_v_shaped (0.89 > 0.7)",
+          "depth_below_scatter (ratio=0.79)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 0.9694984555244446,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.23893805309734517,
+          "secondary_eclipse_depth": 4.817369860887766e-05,
+          "data_vshape": 0.8888888888888888,
+          "individual_transit_snr": 2.170184338542268,
+          "depth_scatter_ratio": 0.789971665437179,
+          "odd_even_mismatch": 1.400507843000676,
+          "odd_even_ratio": 0.998908032961793
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T00:26:37.225306",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_333791520_p2_candidate.png",
+      "n_transit_times": 25,
+      "plot_filename": "TIC_333791520_p2_candidate.png"
+    },
+    {
+      "tic_id": 440629273,
+      "planet_num": 1,
+      "period_days": 0.6396472079681064,
+      "t0_btjd": 2937.0719785135548,
+      "depth_ppt": 0.9244087243456267,
+      "duration_hours": 0.6377111826212218,
+      "sde": 8.604099578673711,
+      "snr": 10.61359308809968,
+      "n_transits": 40,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "B",
+        "reason": "Needs more data: depth_below_scatter (ratio=0.47); marginal_sde (8.6)",
+        "flags": [
+          "depth_below_scatter (ratio=0.47)",
+          "marginal_sde (8.6)"
+        ],
+        "metrics": {
+          "gaia_ruwe": null,
+          "vshape": 0.24100156494522695,
+          "secondary_eclipse_depth": -0.0001736667308829265,
+          "data_vshape": 0.625,
+          "individual_transit_snr": 1.719949651880784,
+          "depth_scatter_ratio": 0.4700193694282332,
+          "odd_even_mismatch": 1.1888022994289271,
+          "odd_even_ratio": 0.9997088543733178
+        }
+      },
+      "grade": "B",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T00:38:12.983947",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_440629273_candidate.png",
+      "n_transit_times": 40,
+      "plot_filename": "TIC_440629273_candidate.png"
+    },
+    {
+      "tic_id": 440594479,
+      "planet_num": 1,
+      "period_days": 0.6133428863054019,
+      "t0_btjd": 2937.349931213478,
+      "depth_ppt": 1.3564547467580512,
+      "duration_hours": 0.278425430917687,
+      "sde": 7.024245122798673,
+      "snr": 8.324795668090177,
+      "n_transits": 42,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.94 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.94 > 0.7)",
+          "sub_noise_transits (individual SNR=1.25)",
+          "depth_below_scatter (ratio=0.52)",
+          "marginal_sde (7.0)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.2021929025650024,
+            "non_single_star": 0,
+            "binary_flag": "marginal"
+          },
+          "vshape": 0.24137931034482762,
+          "secondary_eclipse_depth": -4.6263323845829873e-05,
+          "data_vshape": 0.9444444444444444,
+          "individual_transit_snr": 1.2470046544007427,
+          "depth_scatter_ratio": 0.5173092069355539,
+          "odd_even_mismatch": 1.8144737459999938,
+          "odd_even_ratio": 1.0007846978990886
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T00:42:41.007743",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_440594479_candidate.png",
+      "n_transit_times": 42,
+      "plot_filename": "TIC_440594479_candidate.png"
+    },
+    {
+      "tic_id": 283784656,
+      "planet_num": 1,
+      "period_days": 5.563321233873136,
+      "t0_btjd": 2965.486082494912,
+      "depth_ppt": 1.912999672746274,
+      "duration_hours": 0.7496474687570461,
+      "sde": 9.424533664792042,
+      "snr": 11.644178897631488,
+      "n_transits": 5,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.96 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.96 > 0.7)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.1721458435058594,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.2471910112359551,
+          "secondary_eclipse_depth": -1.6224850972745841e-06,
+          "data_vshape": 0.9565217391304348,
+          "individual_transit_snr": 5.690841033067421,
+          "depth_scatter_ratio": 1.3673476326132894,
+          "odd_even_mismatch": 0.5232529696621231,
+          "odd_even_ratio": 1.0003841927875137
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T00:49:00.342057",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_283784656_candidate.png",
+      "n_transit_times": 5,
+      "plot_filename": "TIC_283784656_candidate.png"
+    },
+    {
+      "tic_id": 147102369,
+      "planet_num": 1,
+      "period_days": 2.0648173583084173,
+      "t0_btjd": 2964.155708357681,
+      "depth_ppt": 8.724337808989958,
+      "duration_hours": 0.7908617630778046,
+      "sde": 21.696381488092378,
+      "snr": 37.63914221074172,
+      "n_transits": 12,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: gaia_confirmed_binary (RUWE=4.48, NSS=2); deep_transit (8.7ppt > 5.0ppt)",
+        "flags": [
+          "gaia_confirmed_binary (RUWE=4.48, NSS=2)",
+          "deep_transit (8.7ppt > 5.0ppt)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 4.481947422027588,
+            "non_single_star": 2,
+            "binary_flag": "confirmed_binary"
+          },
+          "vshape": 0.24,
+          "secondary_eclipse_depth": 0.00015865984436236324,
+          "data_vshape": 0.6666666666666667,
+          "individual_transit_snr": 20.56965939181877,
+          "depth_scatter_ratio": 4.634387720945068,
+          "odd_even_mismatch": 1.1010180290984202,
+          "odd_even_ratio": 1.0010549212815059
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T00:57:18.123961",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_147102369_candidate.png",
+      "n_transit_times": 12,
+      "plot_filename": "TIC_147102369_candidate.png"
+    },
+    {
+      "tic_id": 31530164,
+      "planet_num": 1,
+      "period_days": 3.238392462885171,
+      "t0_btjd": 2965.2731548265037,
+      "depth_ppt": 0.2477827246670783,
+      "duration_hours": 0.7129511222681559,
+      "sde": 7.058590174330687,
+      "snr": 5.497330744257647,
+      "n_transits": 7,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.83 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.83 > 0.7)",
+          "depth_below_scatter (ratio=0.48)",
+          "marginal_sde (7.1)",
+          "marginal_snr (5.5)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.0660948753356934,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.23611111111111116,
+          "secondary_eclipse_depth": 2.5278648614679433e-05,
+          "data_vshape": 0.8333333333333334,
+          "individual_transit_snr": 2.1391939411122842,
+          "depth_scatter_ratio": 0.47797693575113054,
+          "odd_even_mismatch": 0.6584876859628254,
+          "odd_even_ratio": 0.999912050596079
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T01:01:33.699210",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_31530164_candidate.png",
+      "n_transit_times": 7,
+      "plot_filename": "TIC_31530164_candidate.png"
+    },
+    {
+      "tic_id": 31530164,
+      "planet_num": 2,
+      "period_days": 2.588639660714148,
+      "t0_btjd": 2964.3823811768852,
+      "depth_ppt": 0.16173878461900326,
+      "duration_hours": 1.2909878775478896,
+      "sde": 8.853478780058824,
+      "snr": 5.515150265936687,
+      "n_transits": 10,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.89 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.89 > 0.7)",
+          "depth_below_scatter (ratio=0.31)",
+          "marginal_sde (8.9)",
+          "marginal_snr (5.5)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.0660948753356934,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.23926380368098155,
+          "secondary_eclipse_depth": -2.5317848074579707e-05,
+          "data_vshape": 0.8888888888888888,
+          "individual_transit_snr": 1.7507426945517466,
+          "depth_scatter_ratio": 0.3146156937223767,
+          "odd_even_mismatch": 0.2328679699530027,
+          "odd_even_ratio": 0.9999822682976403
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T01:01:35.071994",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_31530164_p2_candidate.png",
+      "n_transit_times": 10,
+      "plot_filename": "TIC_31530164_p2_candidate.png"
+    },
+    {
+      "tic_id": 149542947,
+      "planet_num": 1,
+      "period_days": 0.6411486125511691,
+      "t0_btjd": 2964.5224416362207,
+      "depth_ppt": 0.28959504275971604,
+      "duration_hours": 0.7167474973617194,
+      "sde": 8.020204173192456,
+      "snr": 21.96804871213569,
+      "n_transits": 37,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.86 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.86 > 0.7)",
+          "depth_below_scatter (ratio=0.83)",
+          "marginal_sde (8.0)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 0.8190473318099976,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.24032042723631508,
+          "secondary_eclipse_depth": -1.8475044171184507e-05,
+          "data_vshape": 0.8571428571428572,
+          "individual_transit_snr": 3.665367351769399,
+          "depth_scatter_ratio": 0.8285351145085054,
+          "odd_even_mismatch": 0.7620290812658619,
+          "odd_even_ratio": 0.999977594365844
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T01:09:02.775598",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_149542947_candidate.png",
+      "n_transit_times": 37,
+      "plot_filename": "TIC_149542947_candidate.png"
+    },
+    {
+      "tic_id": 149542947,
+      "planet_num": 2,
+      "period_days": 0.7476843560633987,
+      "t0_btjd": 2964.0978986210357,
+      "depth_ppt": 0.3889050236892677,
+      "duration_hours": 0.5017490488467637,
+      "sde": 8.393276292399614,
+      "snr": 20.076335164117445,
+      "n_transits": 32,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.81 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.81 > 0.7)",
+          "marginal_sde (8.4)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 0.8190473318099976,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.23896103896103893,
+          "secondary_eclipse_depth": -3.966662404497612e-05,
+          "data_vshape": 0.8095238095238095,
+          "individual_transit_snr": 3.4554889883160955,
+          "depth_scatter_ratio": 1.1198824637621914,
+          "odd_even_mismatch": 1.8498418302209523,
+          "odd_even_ratio": 1.0001004843549874
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T01:09:04.242042",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_149542947_p2_candidate.png",
+      "n_transit_times": 32,
+      "plot_filename": "TIC_149542947_p2_candidate.png"
+    },
+    {
+      "tic_id": 149542947,
+      "planet_num": 3,
+      "period_days": 2.033434600129653,
+      "t0_btjd": 2965.25828792468,
+      "depth_ppt": 0.4737971706152422,
+      "duration_hours": 0.6858946319703627,
+      "sde": 10.525855094567104,
+      "snr": 17.917378558374754,
+      "n_transits": 12,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "A",
+        "reason": "Strong signal, no red flags",
+        "flags": [],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 0.8190473318099976,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.2459893048128342,
+          "secondary_eclipse_depth": 1.0475938424292508e-05,
+          "data_vshape": 0.65,
+          "individual_transit_snr": 4.764681931803174,
+          "depth_scatter_ratio": 1.3900948861919071,
+          "odd_even_mismatch": 2.261697562111651,
+          "odd_even_ratio": 1.0001303536705364
+        }
+      },
+      "grade": "A",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T01:09:05.645246",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_149542947_p3_candidate.png",
+      "n_transit_times": 12,
+      "plot_filename": "TIC_149542947_p3_candidate.png"
+    },
+    {
+      "tic_id": 60376707,
+      "planet_num": 1,
+      "period_days": 5.904832179594248,
+      "t0_btjd": 2964.3365917604015,
+      "depth_ppt": 0.16601465742460686,
+      "duration_hours": 0.8842684494397073,
+      "sde": 8.47498826987496,
+      "snr": 8.01627657394269,
+      "n_transits": 5,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.85 > 0.7)",
+        "flags": [
+          "gaia_likely_binary (RUWE=9.84)",
+          "data_v_shaped (0.85 > 0.7)",
+          "depth_below_scatter (ratio=0.84)",
+          "marginal_sde (8.5)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 9.83825969696045,
+            "non_single_star": 0,
+            "binary_flag": "likely_binary"
+          },
+          "vshape": 0.2376237623762376,
+          "secondary_eclipse_depth": -5.357596455368707e-07,
+          "data_vshape": 0.85,
+          "individual_transit_snr": 3.725603518362884,
+          "depth_scatter_ratio": 0.8376390989270606,
+          "odd_even_mismatch": 0.1651492317379277,
+          "odd_even_ratio": 0.9999889377716797
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T01:11:13.108736",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_60376707_candidate.png",
+      "n_transit_times": 5,
+      "plot_filename": "TIC_60376707_candidate.png"
+    },
+    {
+      "tic_id": 270683927,
+      "planet_num": 1,
+      "period_days": 2.659329092711312,
+      "t0_btjd": 2966.2431544301066,
+      "depth_ppt": 0.7651427169289571,
+      "duration_hours": 1.8682489444698955,
+      "sde": 7.1532663387541096,
+      "snr": 5.963708750954511,
+      "n_transits": 9,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.80 > 0.7)",
+        "flags": [
+          "gaia_likely_binary (RUWE=1.45)",
+          "data_v_shaped (0.80 > 0.7)",
+          "depth_below_scatter (ratio=0.31)",
+          "marginal_sde (7.2)",
+          "marginal_snr (6.0)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.4515445232391357,
+            "non_single_star": 0,
+            "binary_flag": "likely_binary"
+          },
+          "vshape": 0.23861171366594358,
+          "secondary_eclipse_depth": 0.00011302489665121485,
+          "data_vshape": 0.8,
+          "individual_transit_snr": 2.2102097268431367,
+          "depth_scatter_ratio": 0.3145835897740482,
+          "odd_even_mismatch": 1.246070735772314,
+          "odd_even_ratio": 1.000412323747976
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T01:17:12.729501",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_270683927_candidate.png",
+      "n_transit_times": 9,
+      "plot_filename": "TIC_270683927_candidate.png"
+    },
+    {
+      "tic_id": 175079720,
+      "planet_num": 1,
+      "period_days": 2.2637886649351646,
+      "t0_btjd": 2964.975128730707,
+      "depth_ppt": 1.3391734509721198,
+      "duration_hours": 2.413829257619326,
+      "sde": 10.304287409748808,
+      "snr": 6.373046630694826,
+      "n_transits": 11,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.95 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.95 > 0.7)",
+          "depth_below_scatter (ratio=0.27)",
+          "marginal_snr (6.4)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.181553840637207,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.2408963585434174,
+          "secondary_eclipse_depth": -1.2270376649747838e-05,
+          "data_vshape": 0.95,
+          "individual_transit_snr": 2.1274723740635024,
+          "depth_scatter_ratio": 0.2683218238468842,
+          "odd_even_mismatch": 0.1432431016357935,
+          "odd_even_ratio": 1.0000838402212728
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": true,
+        "matching_toi": "3385.01",
+        "disposition": "FP",
+        "period_match": true,
+        "toi_entries": [
+          {
+            "toi": "3385.01",
+            "period": 2.2623261,
+            "depth_ppm": 2940.0,
+            "duration_hrs": 3.048,
+            "radius_earth": 4.86815,
+            "disposition": "FP"
+          }
+        ]
+      },
+      "is_known": true,
+      "matching_toi": "3385.01",
+      "timestamp": "2026-03-29T01:23:42.736622",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_175079720_candidate.png",
+      "n_transit_times": 11,
+      "plot_filename": "TIC_175079720_candidate.png"
+    },
+    {
+      "tic_id": 308543286,
+      "planet_num": 1,
+      "period_days": 11.10423010819711,
+      "t0_btjd": 2965.9543395445407,
+      "depth_ppt": 4.088156930445286,
+      "duration_hours": 1.0786565613859378,
+      "sde": 9.612017802030728,
+      "snr": 8.702785579110818,
+      "n_transits": 2,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.92 > 0.7)",
+        "flags": [
+          "gaia_likely_binary (RUWE=1.40)",
+          "suspicious_depth (4.1ppt > 3.0ppt)",
+          "data_v_shaped (0.92 > 0.7)",
+          "few_transits (2)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.401278018951416,
+            "non_single_star": 0,
+            "binary_flag": "likely_binary"
+          },
+          "vshape": 0.22580645161290325,
+          "secondary_eclipse_depth": 1.1317656618548e-05,
+          "data_vshape": 0.9230769230769231,
+          "individual_transit_snr": 9.943016546726701,
+          "depth_scatter_ratio": 1.799868356616366,
+          "odd_even_mismatch": 2.3060629255619114,
+          "odd_even_ratio": 0.9970798319659125
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T01:25:14.793277",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_308543286_candidate.png",
+      "n_transit_times": 2,
+      "plot_filename": "TIC_308543286_candidate.png"
+    },
+    {
+      "tic_id": 410159011,
+      "planet_num": 1,
+      "period_days": 2.6233257030095496,
+      "t0_btjd": 2964.057788330238,
+      "depth_ppt": 4.888939884825083,
+      "duration_hours": 2.4013763474730627,
+      "sde": 16.325303375584625,
+      "snr": 17.116547702948065,
+      "n_transits": 10,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.80 > 0.7)",
+        "flags": [
+          "suspicious_depth (4.9ppt > 3.0ppt)",
+          "data_v_shaped (0.80 > 0.7)",
+          "depth_below_scatter (ratio=0.75)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 0.9623724818229675,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.23895253682487727,
+          "secondary_eclipse_depth": -0.00012997450405971556,
+          "data_vshape": 0.8,
+          "individual_transit_snr": 5.786899966970347,
+          "depth_scatter_ratio": 0.7525575469176805,
+          "odd_even_mismatch": 0.4165291449018145,
+          "odd_even_ratio": 0.9997047586937999
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": true,
+        "matching_toi": "3406.01",
+        "disposition": "PC",
+        "period_match": true,
+        "toi_entries": [
+          {
+            "toi": "3406.01",
+            "period": 2.623354,
+            "depth_ppm": 8790.0,
+            "duration_hrs": 2.845,
+            "radius_earth": 16.3338,
+            "disposition": "PC"
+          }
+        ]
+      },
+      "is_known": true,
+      "matching_toi": "3406.01",
+      "timestamp": "2026-03-29T01:29:43.101464",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_410159011_candidate.png",
+      "n_transit_times": 10,
+      "plot_filename": "TIC_410159011_candidate.png"
+    },
+    {
+      "tic_id": 130371795,
+      "planet_num": 1,
+      "period_days": 0.6631330399501563,
+      "t0_btjd": 2964.070974783255,
+      "depth_ppt": 0.6811964244106683,
+      "duration_hours": 0.4481007388481295,
+      "sde": 9.081566504288443,
+      "snr": 17.20676259251942,
+      "n_transits": 37,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.74 > 0.7)",
+        "flags": [
+          "gaia_likely_binary (RUWE=3.60)",
+          "data_v_shaped (0.74 > 0.7)",
+          "depth_below_scatter (ratio=0.89)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 3.596482515335083,
+            "non_single_star": 0,
+            "binary_flag": "likely_binary"
+          },
+          "vshape": 0.24017467248908297,
+          "secondary_eclipse_depth": 0.00010735196363265143,
+          "data_vshape": 0.736842105263158,
+          "individual_transit_snr": 3.099192365498413,
+          "depth_scatter_ratio": 0.8903662923010411,
+          "odd_even_mismatch": 2.65387410064141,
+          "odd_even_ratio": 1.0002493281395999
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T01:32:48.563070",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_130371795_candidate.png",
+      "n_transit_times": 37,
+      "plot_filename": "TIC_130371795_candidate.png"
+    },
+    {
+      "tic_id": 341411516,
+      "planet_num": 1,
+      "period_days": 3.1055018151745806,
+      "t0_btjd": 2964.0458747245048,
+      "depth_ppt": 0.7414339601696796,
+      "duration_hours": 1.8561003357028474,
+      "sde": 13.735000839483522,
+      "snr": 9.825349539930855,
+      "n_transits": 8,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: gaia_confirmed_binary (RUWE=1.66, NSS=1); data_v_shaped (0.83 > 0.7)",
+        "flags": [
+          "gaia_confirmed_binary (RUWE=1.66, NSS=1)",
+          "data_v_shaped (0.83 > 0.7)",
+          "depth_below_scatter (ratio=0.54)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.659886121749878,
+            "non_single_star": 1,
+            "binary_flag": "confirmed_binary"
+          },
+          "vshape": 0.2394014962593516,
+          "secondary_eclipse_depth": 3.24087257185246e-05,
+          "data_vshape": 0.8333333333333334,
+          "individual_transit_snr": 3.7796556438719926,
+          "depth_scatter_ratio": 0.5415154431309654,
+          "odd_even_mismatch": 0.14279151061546536,
+          "odd_even_ratio": 0.9999715581883254
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T01:33:50.323063",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_341411516_candidate.png",
+      "n_transit_times": 8,
+      "plot_filename": "TIC_341411516_candidate.png"
+    },
+    {
+      "tic_id": 293649186,
+      "planet_num": 1,
+      "period_days": 5.265948144968091,
+      "t0_btjd": 2965.929627662595,
+      "depth_ppt": 0.3884828392399786,
+      "duration_hours": 0.8303765160112677,
+      "sde": 7.295083459661519,
+      "snr": 9.46842148324089,
+      "n_transits": 5,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.95 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.95 > 0.7)",
+          "depth_below_scatter (ratio=1.00)",
+          "marginal_sde (7.3)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 0.9793161153793335,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.24761904761904763,
+          "secondary_eclipse_depth": 7.142019209371853e-07,
+          "data_vshape": 0.95,
+          "individual_transit_snr": 4.509949689208122,
+          "depth_scatter_ratio": 0.9983374255917542,
+          "odd_even_mismatch": 0.7583837091024139,
+          "odd_even_ratio": 1.0000783397258128
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T01:39:52.206857",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_293649186_candidate.png",
+      "n_transit_times": 5,
+      "plot_filename": "TIC_293649186_candidate.png"
+    },
+    {
+      "tic_id": 110111666,
+      "planet_num": 1,
+      "period_days": 0.8068299459305197,
+      "t0_btjd": 2964.2067563683654,
+      "depth_ppt": 0.8188320348512246,
+      "duration_hours": 1.6783843581539082,
+      "sde": 7.612871837231792,
+      "snr": 5.412506475957466,
+      "n_transits": 30,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.94 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.94 > 0.7)",
+          "sub_noise_transits (individual SNR=1.05)",
+          "depth_below_scatter (ratio=0.16)",
+          "marginal_sde (7.6)",
+          "marginal_snr (5.4)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.1213229894638062,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.23982869379014993,
+          "secondary_eclipse_depth": 0.00029321508463009405,
+          "data_vshape": 0.9411764705882353,
+          "individual_transit_snr": 1.051984814861109,
+          "depth_scatter_ratio": 0.1563209685173254,
+          "odd_even_mismatch": 0.37638181982555224,
+          "odd_even_ratio": 1.0001436359405205
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T01:41:35.069089",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_110111666_candidate.png",
+      "n_transit_times": 30,
+      "plot_filename": "TIC_110111666_candidate.png"
+    },
+    {
+      "tic_id": 134596619,
+      "planet_num": 1,
+      "period_days": 3.7208155898067883,
+      "t0_btjd": 2966.2483969696727,
+      "depth_ppt": 6.550165237230843,
+      "duration_hours": 1.4598675414369715,
+      "sde": 16.231556075092737,
+      "snr": 8.919376857597541,
+      "n_transits": 6,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: deep_transit (6.6ppt > 5.0ppt); data_v_shaped (0.95 > 0.7)",
+        "flags": [
+          "deep_transit (6.6ppt > 5.0ppt)",
+          "data_v_shaped (0.95 > 0.7)",
+          "depth_below_scatter (ratio=0.65)"
+        ],
+        "metrics": {
+          "gaia_ruwe": null,
+          "vshape": 0.24060150375939848,
+          "secondary_eclipse_depth": 0.00010244399987713315,
+          "data_vshape": 0.9545454545454546,
+          "individual_transit_snr": 4.244694857755867,
+          "depth_scatter_ratio": 0.6451625060838457,
+          "odd_even_mismatch": 0.5066575008327436,
+          "odd_even_ratio": 0.999064701903258
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": true,
+        "matching_toi": "4848.01",
+        "disposition": "PC",
+        "period_match": true,
+        "toi_entries": [
+          {
+            "toi": "4848.01",
+            "period": 3.7235407,
+            "depth_ppm": 8088.7861019,
+            "duration_hrs": 2.1053503,
+            "radius_earth": 18.0478848,
+            "disposition": "PC"
+          }
+        ]
+      },
+      "is_known": true,
+      "matching_toi": "4848.01",
+      "timestamp": "2026-03-29T01:54:04.724225",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_134596619_candidate.png",
+      "n_transit_times": 6,
+      "plot_filename": "TIC_134596619_candidate.png"
+    },
+    {
+      "tic_id": 270683607,
+      "planet_num": 1,
+      "period_days": 4.290783217443886,
+      "t0_btjd": 2964.0097201604704,
+      "depth_ppt": 0.5688772964652644,
+      "duration_hours": 1.1646406355744061,
+      "sde": 7.068488610823604,
+      "snr": 7.280401683218843,
+      "n_transits": 6,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.93 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.93 > 0.7)",
+          "depth_below_scatter (ratio=0.62)",
+          "marginal_sde (7.1)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.218329906463623,
+            "non_single_star": 0,
+            "binary_flag": "marginal"
+          },
+          "vshape": 0.2359550561797753,
+          "secondary_eclipse_depth": 1.8839132134851333e-05,
+          "data_vshape": 0.9285714285714286,
+          "individual_transit_snr": 3.2999676042744843,
+          "depth_scatter_ratio": 0.6169991712219399,
+          "odd_even_mismatch": 1.0691918899812825,
+          "odd_even_ratio": 0.9997886863620048
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T01:58:04.536354",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_270683607_candidate.png",
+      "n_transit_times": 6,
+      "plot_filename": "TIC_270683607_candidate.png"
+    },
+    {
+      "tic_id": 45631939,
+      "planet_num": 1,
+      "period_days": 1.6609368769095427,
+      "t0_btjd": 2989.7982721427275,
+      "depth_ppt": 6.054162679964614,
+      "duration_hours": 0.9237548267002583,
+      "sde": 10.350046032788994,
+      "snr": 29.168136703727384,
+      "n_transits": 15,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: deep_transit (6.1ppt > 5.0ppt); data_v_shaped (0.82 > 0.7)",
+        "flags": [
+          "deep_transit (6.1ppt > 5.0ppt)",
+          "data_v_shaped (0.82 > 0.7)"
+        ],
+        "metrics": {
+          "gaia_ruwe": null,
+          "vshape": 0.24164524421593825,
+          "secondary_eclipse_depth": -0.0006751501055275444,
+          "data_vshape": 0.8181818181818181,
+          "individual_transit_snr": 10.59318184511741,
+          "depth_scatter_ratio": 2.101068128618303,
+          "odd_even_mismatch": 0.17570264162691887,
+          "odd_even_ratio": 1.0000662988260394
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T02:16:06.141797",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_45631939_candidate.png",
+      "n_transit_times": 15,
+      "plot_filename": "TIC_45631939_candidate.png"
+    },
+    {
+      "tic_id": 262570768,
+      "planet_num": 1,
+      "period_days": 1.1624865235277606,
+      "t0_btjd": 2989.8845926544136,
+      "depth_ppt": 0.17784267266829357,
+      "duration_hours": 2.593619391916647,
+      "sde": 8.81760755380966,
+      "snr": 10.48248771962426,
+      "n_transits": 21,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.70 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.70 > 0.7)",
+          "depth_below_scatter (ratio=0.29)",
+          "marginal_sde (8.8)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.0251591205596924,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.23882503192848026,
+          "secondary_eclipse_depth": 3.6962690988739944e-05,
+          "data_vshape": 0.7037037037037037,
+          "individual_transit_snr": 2.480556186446874,
+          "depth_scatter_ratio": 0.2901736334412281,
+          "odd_even_mismatch": 0.6290273109959792,
+          "odd_even_ratio": 0.9999718797759488
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T02:20:17.750784",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_262570768_candidate.png",
+      "n_transit_times": 21,
+      "plot_filename": "TIC_262570768_candidate.png"
+    },
+    {
+      "tic_id": 394232171,
+      "planet_num": 1,
+      "period_days": 3.5477513640115763,
+      "t0_btjd": 2992.4528829179917,
+      "depth_ppt": 0.20936477206867643,
+      "duration_hours": 0.6845148235171621,
+      "sde": 8.668993044332817,
+      "snr": 5.345081838188953,
+      "n_transits": 7,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.95 > 0.7)",
+        "flags": [
+          "gaia_likely_binary (RUWE=5.38)",
+          "data_v_shaped (0.95 > 0.7)",
+          "depth_below_scatter (ratio=0.53)",
+          "marginal_sde (8.7)",
+          "marginal_snr (5.3)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 5.384734630584717,
+            "non_single_star": 0,
+            "binary_flag": "likely_binary"
+          },
+          "vshape": 0.234375,
+          "secondary_eclipse_depth": -7.331328383597402e-06,
+          "data_vshape": 0.95,
+          "individual_transit_snr": 2.2498173941612976,
+          "depth_scatter_ratio": 0.531696758382326,
+          "odd_even_mismatch": 0.3764999186808938,
+          "odd_even_ratio": 0.9999650886425052
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T02:22:18.678800",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_394232171_candidate.png",
+      "n_transit_times": 7,
+      "plot_filename": "TIC_394232171_candidate.png"
+    },
+    {
+      "tic_id": 74967390,
+      "planet_num": 1,
+      "period_days": 5.4528237918967255,
+      "t0_btjd": 2991.0252621789286,
+      "depth_ppt": 1.8712307772187353,
+      "duration_hours": 3.6347011980126434,
+      "sde": 13.25060310370529,
+      "snr": 9.098379982297075,
+      "n_transits": 5,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.87 > 0.7)",
+        "flags": [
+          "gaia_likely_binary (RUWE=9.57)",
+          "data_v_shaped (0.87 > 0.7)",
+          "depth_below_scatter (ratio=0.44)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 9.570405006408691,
+            "non_single_star": 0,
+            "binary_flag": "likely_binary"
+          },
+          "vshape": 0.24070021881838077,
+          "secondary_eclipse_depth": 0.00016582934307041164,
+          "data_vshape": 0.8666666666666667,
+          "individual_transit_snr": 4.151289053211237,
+          "depth_scatter_ratio": 0.44046576671284726,
+          "odd_even_mismatch": 1.0210003090187403,
+          "odd_even_ratio": 0.9993929383454999
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": true,
+        "matching_toi": "4260.01",
+        "disposition": "PC",
+        "period_match": true,
+        "toi_entries": [
+          {
+            "toi": "4260.01",
+            "period": 5.4588359,
+            "depth_ppm": 3290.0,
+            "duration_hrs": 4.555,
+            "radius_earth": 8.59319,
+            "disposition": "PC"
+          }
+        ]
+      },
+      "is_known": true,
+      "matching_toi": "4260.01",
+      "timestamp": "2026-03-29T02:24:21.022415",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_74967390_candidate.png",
+      "n_transit_times": 5,
+      "plot_filename": "TIC_74967390_candidate.png"
+    },
+    {
+      "tic_id": 123152414,
+      "planet_num": 1,
+      "period_days": 2.9733027794124527,
+      "t0_btjd": 2990.092041292382,
+      "depth_ppt": 0.2676474533124251,
+      "duration_hours": 0.7489462962320741,
+      "sde": 7.101538816670025,
+      "snr": 5.250636975183753,
+      "n_transits": 9,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.91 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.91 > 0.7)",
+          "depth_below_scatter (ratio=0.43)",
+          "marginal_sde (7.1)",
+          "marginal_snr (5.3)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 0.9020302891731262,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.23913043478260865,
+          "secondary_eclipse_depth": 1.7875079517670756e-06,
+          "data_vshape": 0.9090909090909091,
+          "individual_transit_snr": 1.9623831560889857,
+          "depth_scatter_ratio": 0.43175197656701186,
+          "odd_even_mismatch": 0.7427362703820712,
+          "odd_even_ratio": 0.9999056314037547
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T02:28:33.626109",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_123152414_candidate.png",
+      "n_transit_times": 9,
+      "plot_filename": "TIC_123152414_candidate.png"
+    },
+    {
+      "tic_id": 455305421,
+      "planet_num": 1,
+      "period_days": 6.433052654217211,
+      "t0_btjd": 2994.596634546326,
+      "depth_ppt": 0.18159471410839068,
+      "duration_hours": 1.5657466730369873,
+      "sde": 7.0955420408956655,
+      "snr": 7.8390469981173485,
+      "n_transits": 4,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.94 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.94 > 0.7)",
+          "depth_below_scatter (ratio=0.78)",
+          "marginal_sde (7.1)"
+        ],
+        "metrics": {
+          "gaia_ruwe": null,
+          "vshape": 0.23952095808383234,
+          "secondary_eclipse_depth": 1.4080149661421792e-05,
+          "data_vshape": 0.9411764705882353,
+          "individual_transit_snr": 4.999399829218589,
+          "depth_scatter_ratio": 0.7806185661422589,
+          "odd_even_mismatch": 0.770162635813112,
+          "odd_even_ratio": 0.9999451080337212
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T02:29:41.245963",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_455305421_candidate.png",
+      "n_transit_times": 4,
+      "plot_filename": "TIC_455305421_candidate.png"
+    },
+    {
+      "tic_id": 149573659,
+      "planet_num": 1,
+      "period_days": 4.375793602715144,
+      "t0_btjd": 2991.36329286451,
+      "depth_ppt": 22.410920292367685,
+      "duration_hours": 0.6722542611653985,
+      "sde": 20.90997162940268,
+      "snr": 54.22389752570156,
+      "n_transits": 6,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: gaia_confirmed_binary (RUWE=0.89, NSS=2); deep_transit (22.4ppt > 5.0ppt)",
+        "flags": [
+          "gaia_confirmed_binary (RUWE=0.89, NSS=2)",
+          "deep_transit (22.4ppt > 5.0ppt)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 0.8888892531394958,
+            "non_single_star": 2,
+            "binary_flag": "confirmed_binary"
+          },
+          "vshape": 0.2376237623762376,
+          "secondary_eclipse_depth": 0.00010311257833206522,
+          "data_vshape": 0.5,
+          "individual_transit_snr": 53.50514875533417,
+          "depth_scatter_ratio": 13.312547635293553,
+          "odd_even_mismatch": 0.6120753030249751,
+          "odd_even_ratio": 0.997156707500187
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T02:35:21.590961",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_149573659_candidate.png",
+      "n_transit_times": 6,
+      "plot_filename": "TIC_149573659_candidate.png"
+    },
+    {
+      "tic_id": 92736498,
+      "planet_num": 1,
+      "period_days": 6.317916381888355,
+      "t0_btjd": 2995.0814687321613,
+      "depth_ppt": 0.32801624762202053,
+      "duration_hours": 1.1871538483704742,
+      "sde": 7.46384042738937,
+      "snr": 13.642347776157612,
+      "n_transits": 4,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.90 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.90 > 0.7)",
+          "marginal_sde (7.5)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.071107268333435,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.23703703703703705,
+          "secondary_eclipse_depth": -6.486949306605538e-06,
+          "data_vshape": 0.9,
+          "individual_transit_snr": 9.184607134132817,
+          "depth_scatter_ratio": 1.5680180758986904,
+          "odd_even_mismatch": 0.6562026537245977,
+          "odd_even_ratio": 0.9999417442691458
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T02:37:09.348944",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_92736498_candidate.png",
+      "n_transit_times": 4,
+      "plot_filename": "TIC_92736498_candidate.png"
+    },
+    {
+      "tic_id": 55170969,
+      "planet_num": 1,
+      "period_days": 6.421020224516674,
+      "t0_btjd": 2994.686374864325,
+      "depth_ppt": 0.48816405557572384,
+      "duration_hours": 0.82596497818911,
+      "sde": 8.445031430612477,
+      "snr": 9.291901321669174,
+      "n_transits": 4,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.95 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.95 > 0.7)",
+          "marginal_sde (8.4)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 0.9670414924621582,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.25,
+          "secondary_eclipse_depth": -2.096126702055834e-05,
+          "data_vshape": 0.95,
+          "individual_transit_snr": 5.290271244715234,
+          "depth_scatter_ratio": 1.142406031649153,
+          "odd_even_mismatch": 1.1316133879642956,
+          "odd_even_ratio": 0.9998227686704684
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T02:39:15.067249",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_55170969_candidate.png",
+      "n_transit_times": 4,
+      "plot_filename": "TIC_55170969_candidate.png"
+    },
+    {
+      "tic_id": 182469311,
+      "planet_num": 1,
+      "period_days": 3.0158770653539264,
+      "t0_btjd": 2989.504798527648,
+      "depth_ppt": 4.104996770960545,
+      "duration_hours": 1.4187850740811885,
+      "sde": 16.44926978198505,
+      "snr": 11.50810320605385,
+      "n_transits": 9,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.94 > 0.7)",
+        "flags": [
+          "suspicious_depth (4.1ppt > 3.0ppt)",
+          "data_v_shaped (0.94 > 0.7)",
+          "depth_below_scatter (ratio=0.71)"
+        ],
+        "metrics": {
+          "gaia_ruwe": null,
+          "vshape": 0.23636363636363633,
+          "secondary_eclipse_depth": -3.0702958923045642e-06,
+          "data_vshape": 0.9411764705882353,
+          "individual_transit_snr": 4.262337210493256,
+          "depth_scatter_ratio": 0.7064102816625021,
+          "odd_even_mismatch": 1.047995805704066,
+          "odd_even_ratio": 1.001063373197215
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T02:41:51.792475",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_182469311_candidate.png",
+      "n_transit_times": 9,
+      "plot_filename": "TIC_182469311_candidate.png"
+    },
+    {
+      "tic_id": 56663969,
+      "planet_num": 1,
+      "period_days": 2.5718812292563324,
+      "t0_btjd": 2989.8081753938445,
+      "depth_ppt": 0.40282731834628827,
+      "duration_hours": 0.6120502336745449,
+      "sde": 9.167062679731321,
+      "snr": 6.070365007785408,
+      "n_transits": 10,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.81 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.81 > 0.7)",
+          "depth_below_scatter (ratio=0.46)",
+          "marginal_snr (6.1)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 0.9227222204208374,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.23899371069182385,
+          "secondary_eclipse_depth": -2.563726238857811e-06,
+          "data_vshape": 0.8125,
+          "individual_transit_snr": 1.826275498715931,
+          "depth_scatter_ratio": 0.4643458138771891,
+          "odd_even_mismatch": 0.39823995105117177,
+          "odd_even_ratio": 0.99991158463625
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T02:42:56.047748",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_56663969_candidate.png",
+      "n_transit_times": 10,
+      "plot_filename": "TIC_56663969_candidate.png"
+    },
+    {
+      "tic_id": 19684256,
+      "planet_num": 1,
+      "period_days": 1.3670694540392845,
+      "t0_btjd": 2990.336450018184,
+      "depth_ppt": 16.74670096038289,
+      "duration_hours": 1.6492019316812243,
+      "sde": 19.667157894729453,
+      "snr": 62.75485681584912,
+      "n_transits": 18,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: deep_transit (16.7ppt > 5.0ppt)",
+        "flags": [
+          "deep_transit (16.7ppt > 5.0ppt)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 0.9864736199378967,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.24067388688327318,
+          "secondary_eclipse_depth": -0.000708500299225201,
+          "data_vshape": 0.0,
+          "individual_transit_snr": 16.569621820479036,
+          "depth_scatter_ratio": 2.4746923327310064,
+          "odd_even_mismatch": 0.6278563996313298,
+          "odd_even_ratio": 1.0004610821314017
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": true,
+        "matching_toi": "1901.01",
+        "disposition": "KP",
+        "period_match": true,
+        "toi_entries": [
+          {
+            "toi": "1901.01",
+            "period": 1.3666563,
+            "depth_ppm": 21070.0,
+            "duration_hrs": 1.967,
+            "radius_earth": 15.437,
+            "disposition": "KP"
+          }
+        ]
+      },
+      "is_known": true,
+      "matching_toi": "1901.01",
+      "timestamp": "2026-03-29T02:46:04.139764",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_19684256_candidate.png",
+      "n_transit_times": 18,
+      "plot_filename": "TIC_19684256_candidate.png"
+    },
+    {
+      "tic_id": 25156751,
+      "planet_num": 1,
+      "period_days": 1.7422460394679962,
+      "t0_btjd": 2990.6284406654636,
+      "depth_ppt": 0.8155900318612685,
+      "duration_hours": 1.5815771056718377,
+      "sde": 11.479342503325777,
+      "snr": 7.15153520984607,
+      "n_transits": 14,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.86 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.86 > 0.7)",
+          "depth_below_scatter (ratio=0.33)"
+        ],
+        "metrics": {
+          "gaia_ruwe": null,
+          "vshape": 0.24038461538461542,
+          "secondary_eclipse_depth": 1.5442814644273106e-05,
+          "data_vshape": 0.8571428571428572,
+          "individual_transit_snr": 2.13980765506997,
+          "depth_scatter_ratio": 0.32529463723689583,
+          "odd_even_mismatch": 0.28395374413549135,
+          "odd_even_ratio": 0.9999179780238644
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T02:59:59.455710",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_25156751_candidate.png",
+      "n_transit_times": 14,
+      "plot_filename": "TIC_25156751_candidate.png"
+    },
+    {
+      "tic_id": 189158353,
+      "planet_num": 1,
+      "period_days": 6.056500538601306,
+      "t0_btjd": 2995.1948769996447,
+      "depth_ppt": 0.40907474854656733,
+      "duration_hours": 1.3475876354461729,
+      "sde": 10.247204485895592,
+      "snr": 6.580592298690554,
+      "n_transits": 4,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.88 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.88 > 0.7)",
+          "depth_below_scatter (ratio=0.66)",
+          "marginal_snr (6.6)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 0.9678910970687866,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.23684210526315785,
+          "secondary_eclipse_depth": 5.639269119750434e-05,
+          "data_vshape": 0.88,
+          "individual_transit_snr": 4.003544830997463,
+          "depth_scatter_ratio": 0.6553085025713234,
+          "odd_even_mismatch": 0.6622802116446475,
+          "odd_even_ratio": 0.9998300845749593
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T03:01:11.792076",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_189158353_candidate.png",
+      "n_transit_times": 4,
+      "plot_filename": "TIC_189158353_candidate.png"
+    },
+    {
+      "tic_id": 181275769,
+      "planet_num": 1,
+      "period_days": 0.651197344361768,
+      "t0_btjd": 2989.8390421010595,
+      "depth_ppt": 3.11018826062448,
+      "duration_hours": 0.7420124489876787,
+      "sde": 7.39107401753916,
+      "snr": 5.601424745230675,
+      "n_transits": 38,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.94 > 0.7)",
+        "flags": [
+          "suspicious_depth (3.1ppt > 3.0ppt)",
+          "data_v_shaped (0.94 > 0.7)",
+          "sub_noise_transits (individual SNR=0.96)",
+          "depth_below_scatter (ratio=0.22)",
+          "marginal_sde (7.4)",
+          "marginal_snr (5.6)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.0823394060134888,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.23785166240409206,
+          "secondary_eclipse_depth": 0.0002820125934241968,
+          "data_vshape": 0.9411764705882353,
+          "individual_transit_snr": 0.961148459259153,
+          "depth_scatter_ratio": 0.21501741642139002,
+          "odd_even_mismatch": 0.10355619998383142,
+          "odd_even_ratio": 0.9998502314919092
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T03:02:47.128778",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_181275769_candidate.png",
+      "n_transit_times": 38,
+      "plot_filename": "TIC_181275769_candidate.png"
+    },
+    {
+      "tic_id": 286153328,
+      "planet_num": 1,
+      "period_days": 4.352246673714778,
+      "t0_btjd": 2991.75066226035,
+      "depth_ppt": 19.91528399681841,
+      "duration_hours": 2.820344239565763,
+      "sde": 16.6614433808742,
+      "snr": 36.33637008589952,
+      "n_transits": 6,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: deep_transit (19.9ppt > 5.0ppt); secondary_eclipse (0.48ppt)",
+        "flags": [
+          "deep_transit (19.9ppt > 5.0ppt)",
+          "secondary_eclipse (0.48ppt)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.005984902381897,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.23788546255506604,
+          "secondary_eclipse_depth": 0.00048430275946964585,
+          "data_vshape": 0.6,
+          "individual_transit_snr": 16.938602051294268,
+          "depth_scatter_ratio": 1.9626930420452764,
+          "odd_even_mismatch": 0.3444247291028231,
+          "odd_even_ratio": 0.9994644022863118
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": true,
+        "matching_toi": "4247.01",
+        "disposition": "PC",
+        "period_match": true,
+        "toi_entries": [
+          {
+            "toi": "4247.01",
+            "period": 4.3539599,
+            "depth_ppm": 41586.4865614,
+            "duration_hrs": 3.4390219,
+            "radius_earth": 23.0280318,
+            "disposition": "PC"
+          }
+        ]
+      },
+      "is_known": true,
+      "matching_toi": "4247.01",
+      "timestamp": "2026-03-29T03:04:11.526912",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_286153328_candidate.png",
+      "n_transit_times": 6,
+      "plot_filename": "TIC_286153328_candidate.png"
+    },
+    {
+      "tic_id": 144817604,
+      "planet_num": 1,
+      "period_days": 12.57908076172078,
+      "t0_btjd": 3001.1856213664473,
+      "depth_ppt": 0.4544334616662926,
+      "duration_hours": 2.261632106289084,
+      "sde": 8.795120065056738,
+      "snr": 8.374026626268115,
+      "n_transits": 2,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.90 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.90 > 0.7)",
+          "depth_below_scatter (ratio=0.86)",
+          "few_transits (2)",
+          "marginal_sde (8.8)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.1504387855529785,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.2325581395348837,
+          "secondary_eclipse_depth": -2.276293460723444e-06,
+          "data_vshape": 0.9,
+          "individual_transit_snr": 6.934695828947937,
+          "depth_scatter_ratio": 0.8557477712825569,
+          "odd_even_mismatch": 2.7303467685046074,
+          "odd_even_ratio": 1.0003773154073852
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T03:09:50.278069",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_144817604_candidate.png",
+      "n_transit_times": 2,
+      "plot_filename": "TIC_144817604_candidate.png"
+    },
+    {
+      "tic_id": 252960545,
+      "planet_num": 1,
+      "period_days": 0.6977313862731918,
+      "t0_btjd": 2939.056699707348,
+      "depth_ppt": 0.690959910902178,
+      "duration_hours": 0.36366608202648254,
+      "sde": 8.978898017236787,
+      "snr": 5.04786910684871,
+      "n_transits": 34,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.95 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.95 > 0.7)",
+          "sub_noise_transits (individual SNR=0.88)",
+          "depth_below_scatter (ratio=0.31)",
+          "marginal_sde (9.0)",
+          "marginal_snr (5.0)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.3943842649459839,
+            "non_single_star": 0,
+            "binary_flag": "marginal"
+          },
+          "vshape": 0.24451410658307215,
+          "secondary_eclipse_depth": -2.4446683901335753e-05,
+          "data_vshape": 0.9473684210526316,
+          "individual_transit_snr": 0.8809664914269731,
+          "depth_scatter_ratio": 0.30673745438928884,
+          "odd_even_mismatch": 0.12906251051374582,
+          "odd_even_ratio": 0.9999524211013798
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T03:21:28.091792",
+      "source": "mdwarf_sweep",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_252960545_candidate.png",
+      "n_transit_times": 34,
+      "plot_filename": "TIC_252960545_candidate.png"
+    },
+    {
+      "tic_id": 128295965,
+      "planet_num": 1,
+      "period_days": 8.321501326631942,
+      "t0_btjd": 2936.917880162514,
+      "depth_ppt": 3.2600266524857036,
+      "duration_hours": 0.5570134429192566,
+      "sde": 7.372418239689856,
+      "snr": 5.502896617826456,
+      "n_transits": 4,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.92 > 0.7)",
+        "flags": [
+          "suspicious_depth (3.3ppt > 3.0ppt)",
+          "data_v_shaped (0.92 > 0.7)",
+          "depth_below_scatter (ratio=0.78)",
+          "marginal_sde (7.4)",
+          "marginal_snr (5.5)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.0529075860977173,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.24390243902439024,
+          "secondary_eclipse_depth": 3.084878493875287e-05,
+          "data_vshape": 0.9230769230769231,
+          "individual_transit_snr": 2.3478596922484796,
+          "depth_scatter_ratio": 0.7823994857930014,
+          "odd_even_mismatch": 2.264892232967733,
+          "odd_even_ratio": 1.0038211324327877
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T03:28:31.765398",
+      "source": "mdwarf_sweep",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_128295965_candidate.png",
+      "n_transit_times": 4,
+      "plot_filename": "TIC_128295965_candidate.png"
+    },
+    {
+      "tic_id": 320122825,
+      "planet_num": 1,
+      "period_days": 0.9282944304470067,
+      "t0_btjd": 2964.340730142522,
+      "depth_ppt": 0.2160535748899628,
+      "duration_hours": 1.6137464926764453,
+      "sde": 7.134488873573508,
+      "snr": 7.463345089764616,
+      "n_transits": 26,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.77 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.77 > 0.7)",
+          "depth_below_scatter (ratio=0.25)",
+          "marginal_sde (7.1)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 0.9860681295394897,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.23953098827470687,
+          "secondary_eclipse_depth": 1.6023197951020585e-05,
+          "data_vshape": 0.7727272727272727,
+          "individual_transit_snr": 1.6836368199340306,
+          "depth_scatter_ratio": 0.25183908611171135,
+          "odd_even_mismatch": 1.1865204758000456,
+          "odd_even_ratio": 1.000086857616513
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T03:38:38.139807",
+      "source": "mdwarf_sweep",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_320122825_candidate.png",
+      "n_transit_times": 26,
+      "plot_filename": "TIC_320122825_candidate.png"
+    },
+    {
+      "tic_id": 468953310,
+      "planet_num": 1,
+      "period_days": 5.956572231334795,
+      "t0_btjd": 2964.0667753843786,
+      "depth_ppt": 0.3003350417108974,
+      "duration_hours": 1.9221150907106346,
+      "sde": 11.221116437083412,
+      "snr": 9.843708483412687,
+      "n_transits": 5,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.92 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.92 > 0.7)",
+          "depth_below_scatter (ratio=0.74)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.0826705694198608,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.23853211009174313,
+          "secondary_eclipse_depth": 5.302233179294014e-06,
+          "data_vshape": 0.9166666666666666,
+          "individual_transit_snr": 4.79682798812054,
+          "depth_scatter_ratio": 0.7370304463059337,
+          "odd_even_mismatch": 2.183784782449349,
+          "odd_even_ratio": 1.0002028964319192
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T03:39:54.316077",
+      "source": "mdwarf_sweep",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_468953310_candidate.png",
+      "n_transit_times": 5,
+      "plot_filename": "TIC_468953310_candidate.png"
+    },
+    {
+      "tic_id": 142086812,
+      "planet_num": 1,
+      "period_days": 8.633197265556262,
+      "t0_btjd": 2964.0832455549603,
+      "depth_ppt": 0.8307286567283967,
+      "duration_hours": 1.069802352424519,
+      "sde": 7.543426880088253,
+      "snr": 7.126232164222211,
+      "n_transits": 3,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.96 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.96 > 0.7)",
+          "depth_below_scatter (ratio=0.92)",
+          "long_period_few_transits (P=8.6d, 3 transits)",
+          "marginal_sde (7.5)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.0885246992111206,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.24691358024691357,
+          "secondary_eclipse_depth": 2.8027476061120993e-06,
+          "data_vshape": 0.9583333333333334,
+          "individual_transit_snr": 4.690982529659493,
+          "depth_scatter_ratio": 0.9165814490925615,
+          "odd_even_mismatch": 1.0508322030377222,
+          "odd_even_ratio": 1.000319670113045
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T03:42:00.563317",
+      "source": "mdwarf_sweep",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_142086812_candidate.png",
+      "n_transit_times": 3,
+      "plot_filename": "TIC_142086812_candidate.png"
+    },
+    {
+      "tic_id": 80025900,
+      "planet_num": 1,
+      "period_days": 4.059326819822607,
+      "t0_btjd": 2963.910002812586,
+      "depth_ppt": 25.377162577003066,
+      "duration_hours": 1.287144739772755,
+      "sde": 20.38205808755692,
+      "snr": 64.16904888383985,
+      "n_transits": 6,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: deep_transit (25.4ppt > 5.0ppt); data_v_shaped (0.83 > 0.7)",
+        "flags": [
+          "gaia_likely_binary (RUWE=15.67)",
+          "deep_transit (25.4ppt > 5.0ppt)",
+          "data_v_shaped (0.83 > 0.7)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 15.672069549560547,
+            "non_single_star": 0,
+            "binary_flag": "likely_binary"
+          },
+          "vshape": 0.24528301886792447,
+          "secondary_eclipse_depth": 0.00011665500322977085,
+          "data_vshape": 0.8333333333333334,
+          "individual_transit_snr": 64.97506059838132,
+          "depth_scatter_ratio": 11.164749134263467,
+          "odd_even_mismatch": 0.9006683606619094,
+          "odd_even_ratio": 1.0018634051376487
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T03:49:10.557129",
+      "source": "mdwarf_sweep",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_80025900_candidate.png",
+      "n_transit_times": 6,
+      "plot_filename": "TIC_80025900_candidate.png"
+    },
+    {
+      "tic_id": 193258096,
+      "planet_num": 1,
+      "period_days": 6.292007867292015,
+      "t0_btjd": 2994.9176517560377,
+      "depth_ppt": 0.2080574887910469,
+      "duration_hours": 1.1030049718824593,
+      "sde": 9.340004147092573,
+      "snr": 7.821074043221475,
+      "n_transits": 4,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.90 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.90 > 0.7)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.202134132385254,
+            "non_single_star": 0,
+            "binary_flag": "marginal"
+          },
+          "vshape": 0.23728813559322037,
+          "secondary_eclipse_depth": -1.4444990936723912e-07,
+          "data_vshape": 0.9,
+          "individual_transit_snr": 5.610501920977299,
+          "depth_scatter_ratio": 1.039005779664413,
+          "odd_even_mismatch": 0.5498221322436699,
+          "odd_even_ratio": 1.000050121660498
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T04:06:09.767524",
+      "source": "mdwarf_sweep",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_193258096_candidate.png",
+      "n_transit_times": 4,
+      "plot_filename": "TIC_193258096_candidate.png"
+    },
+    {
+      "tic_id": 383658034,
+      "planet_num": 1,
+      "period_days": 6.63151433144389,
+      "t0_btjd": 2994.1381401011145,
+      "depth_ppt": 0.4322869103866589,
+      "duration_hours": 2.030557783446784,
+      "sde": 11.087716849675365,
+      "snr": 10.848425124097938,
+      "n_transits": 4,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.88 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.88 > 0.7)",
+          "depth_below_scatter (ratio=0.84)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 0.9287121295928955,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.23529411764705888,
+          "secondary_eclipse_depth": 1.0154649818350237e-05,
+          "data_vshape": 0.875,
+          "individual_transit_snr": 6.279614358436975,
+          "depth_scatter_ratio": 0.8398008544993135,
+          "odd_even_mismatch": 0.457876683391175,
+          "odd_even_ratio": 1.0000504780494683
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T04:08:35.610006",
+      "source": "mdwarf_sweep",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_383658034_candidate.png",
+      "n_transit_times": 4,
+      "plot_filename": "TIC_383658034_candidate.png"
+    },
+    {
+      "tic_id": 144717817,
+      "planet_num": 1,
+      "period_days": 6.214025303105576,
+      "t0_btjd": 2994.985240861721,
+      "depth_ppt": 0.46398890649201885,
+      "duration_hours": 2.1324461511023096,
+      "sde": 9.9313026684819,
+      "snr": 8.61730902742573,
+      "n_transits": 4,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.88 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.88 > 0.7)",
+          "depth_below_scatter (ratio=0.71)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.0687555074691772,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.24096385542168675,
+          "secondary_eclipse_depth": 8.438490652573627e-06,
+          "data_vshape": 0.875,
+          "individual_transit_snr": 5.616788483388088,
+          "depth_scatter_ratio": 0.709484712145958,
+          "odd_even_mismatch": 1.5650573916719352,
+          "odd_even_ratio": 1.0002788173592243
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T04:11:23.288861",
+      "source": "mdwarf_sweep",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_144717817_candidate.png",
+      "n_transit_times": 4,
+      "plot_filename": "TIC_144717817_candidate.png"
+    },
+    {
+      "tic_id": 144717817,
+      "planet_num": 2,
+      "period_days": 6.873813351167945,
+      "t0_btjd": 2993.399459491843,
+      "depth_ppt": 0.37571613893894185,
+      "duration_hours": 1.541707585595557,
+      "sde": 8.038618214945496,
+      "snr": 6.490480264448215,
+      "n_transits": 4,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.86 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.86 > 0.7)",
+          "depth_below_scatter (ratio=0.57)",
+          "marginal_sde (8.0)",
+          "marginal_snr (6.5)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.0687555074691772,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.23750000000000004,
+          "secondary_eclipse_depth": 1.5028730718902317e-05,
+          "data_vshape": 0.8636363636363636,
+          "individual_transit_snr": 3.583479176178592,
+          "depth_scatter_ratio": 0.5688267626365081,
+          "odd_even_mismatch": 0.09172659328875384,
+          "odd_even_ratio": 1.0000148866171996
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T04:11:24.668922",
+      "source": "mdwarf_sweep",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_144717817_p2_candidate.png",
+      "n_transit_times": 4,
+      "plot_filename": "TIC_144717817_p2_candidate.png"
+    },
+    {
+      "tic_id": 418082218,
+      "planet_num": 1,
+      "period_days": 2.0067016965457256,
+      "t0_btjd": 2989.939966160541,
+      "depth_ppt": 2.3915011040546164,
+      "duration_hours": 0.5533632981519074,
+      "sde": 7.382085045127322,
+      "snr": 5.144258422198902,
+      "n_transits": 13,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: data_v_shaped (0.83 > 0.7)",
+        "flags": [
+          "data_v_shaped (0.83 > 0.7)",
+          "sub_noise_transits (individual SNR=1.42)",
+          "depth_below_scatter (ratio=0.38)",
+          "marginal_sde (7.4)",
+          "marginal_snr (5.1)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.211789608001709,
+            "non_single_star": 0,
+            "binary_flag": "marginal"
+          },
+          "vshape": 0.24338624338624337,
+          "secondary_eclipse_depth": -5.021075822697618e-05,
+          "data_vshape": 0.8333333333333334,
+          "individual_transit_snr": 1.4196580328451587,
+          "depth_scatter_ratio": 0.37751766934731823,
+          "odd_even_mismatch": 0.691263237971323,
+          "odd_even_ratio": 0.9991682810226814
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T04:22:03.260289",
+      "source": "mdwarf_sweep",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_418082218_candidate.png",
+      "n_transit_times": 13,
+      "plot_filename": "TIC_418082218_candidate.png"
+    },
+    {
+      "tic_id": 144706154,
+      "planet_num": 1,
+      "period_days": 1.065760892505077,
+      "t0_btjd": 2989.7670964792947,
+      "depth_ppt": 2.6348726874662054,
+      "duration_hours": 2.7244103072891757,
+      "sde": 8.096163656267994,
+      "snr": 8.969985641290135,
+      "n_transits": 23,
+      "checks": {
+        "sde_pass": "True",
+        "snr_pass": "True",
+        "depth_reasonable": "True",
+        "enough_transits": true,
+        "period_reasonable": "True",
+        "odd_even_consistent": "True"
+      },
+      "all_checks_pass": true,
+      "vetting": {
+        "grade": "EB",
+        "reason": "Likely eclipsing binary: secondary_eclipse (1.49ppt); data_v_shaped (0.86 > 0.7)",
+        "flags": [
+          "secondary_eclipse (1.49ppt)",
+          "data_v_shaped (0.86 > 0.7)",
+          "depth_below_scatter (ratio=0.25)",
+          "marginal_sde (8.1)"
+        ],
+        "metrics": {
+          "gaia_ruwe": {
+            "ruwe": 1.1276808977127075,
+            "non_single_star": 0,
+            "binary_flag": "clean"
+          },
+          "vshape": 0.24025974025974028,
+          "secondary_eclipse_depth": 0.0014886500279218673,
+          "data_vshape": 0.8571428571428572,
+          "individual_transit_snr": 2.212737639341437,
+          "depth_scatter_ratio": 0.24695546752803135,
+          "odd_even_mismatch": 0.6583079038998434,
+          "odd_even_ratio": 0.9995383359165944
+        }
+      },
+      "grade": "EB",
+      "catalog_match": {
+        "known": false,
+        "matching_toi": null,
+        "disposition": null,
+        "period_match": false,
+        "toi_entries": []
+      },
+      "is_known": false,
+      "matching_toi": null,
+      "timestamp": "2026-03-29T04:28:40.323439",
+      "source": "mdwarf_sweep",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/plots/TIC_144706154_candidate.png",
+      "n_transit_times": 23,
+      "plot_filename": "TIC_144706154_candidate.png"
     }
   ],
   "deep_vets": [
@@ -51631,6 +54809,35 @@
         "depth_to_variability_ratio": 0.5977988896048296
       },
       "timestamp": "2026-03-15T16:01:03.978744"
+    },
+    {
+      "tic_id": 149218335,
+      "n_sectors": 13,
+      "timespan_days": 215.4874756158115,
+      "best_period": 0.6019410722681825,
+      "best_depth_ppt": 0.9901079238446853,
+      "best_sde": 43.63583764836788,
+      "best_snr": 21.01206420501794,
+      "n_transits": 358,
+      "vshape": 0.23946360153256707,
+      "secondary_eclipse": -0.0002584012991686535,
+      "odd_even": {
+        "odd_depth_ppt": null,
+        "even_depth_ppt": null,
+        "odd_points": 39,
+        "even_points": 38,
+        "depth_ratio": null,
+        "depth_diff_sigma": 0.0,
+        "consistent": true
+      },
+      "centroid": null,
+      "vet_warnings": [],
+      "expected_period": 0.6688346249382633,
+      "expected_depth": 0.9975048675765485,
+      "verdict": "NOT_RECOVERED",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/deep_vet/TIC_149218335_deep_vet.png",
+      "timestamp": "2026-03-28T10:46:03.320224",
+      "plot_filename": "TIC_149218335_deep_vet.png"
     },
     {
       "tic_id": 171956384,
@@ -54161,6 +57368,43 @@
       "timestamp": "2026-03-12T15:25:09.994152",
       "verdict": "EB",
       "plot_filename": "TIC_55369219_deep_vet.png"
+    },
+    {
+      "tic_id": 78109759,
+      "n_sectors": 2,
+      "timespan_days": 52.05537648001405,
+      "best_period": 0.7790667512087731,
+      "best_depth_ppt": 2.5101278461818755,
+      "best_sde": 25.476772057029734,
+      "best_snr": 23.894136329231877,
+      "n_transits": 67,
+      "vshape": 0.24086603518267935,
+      "secondary_eclipse": 1.5054889680898853e-05,
+      "odd_even": {
+        "odd_depth_ppt": 4.863643275444973,
+        "even_depth_ppt": 4.604825271836033,
+        "odd_points": 23,
+        "even_points": 21,
+        "depth_ratio": 0.9467851589947741,
+        "depth_diff_sigma": 0.3802022598484741,
+        "consistent": true
+      },
+      "centroid": {
+        "col_shift_px": 0.006274230436929429,
+        "row_shift_px": 0.007700778244839057,
+        "total_shift_px": 0.009933174374381945,
+        "shift_sigma": 50.90549190358649,
+        "n_in_transit": 20,
+        "n_out_transit": 17650,
+        "on_target": true
+      },
+      "vet_warnings": [],
+      "expected_period": 0.7790564455264021,
+      "expected_depth": 2.855865798894852,
+      "verdict": "CONFIRMED",
+      "plot_path": "/Users/Loftus/workspace/exoplanet-search/results/deep_vet/TIC_78109759_deep_vet.png",
+      "timestamp": "2026-03-29T05:11:34.362005",
+      "plot_filename": "TIC_78109759_deep_vet.png"
     }
   ],
   "multi_planet_candidates": [
