@@ -139,7 +139,196 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* ===== STAT CARDS ===== */
+    /* ===== FUNNEL ===== */
+    .funnel-section {
+      margin-bottom: 1.25rem;
+    }
+    .funnel-label {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .funnel-row {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+    }
+    .funnel-step {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.9rem 1rem;
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .funnel-step:first-child { border-radius: 10px 0 0 10px; }
+    .funnel-step:last-child { border-radius: 0 10px 10px 0; }
+    .funnel-step:not(:last-child) { border-right: none; }
+    .funnel-step:hover { background: var(--surface-2); border-color: var(--border-hover); z-index: 1; }
+    .funnel-step .f-label {
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 500;
+    }
+    .funnel-step .f-value {
+      font-family: var(--font);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 0.1rem;
+    }
+    .funnel-step .f-rate {
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      margin-top: 0.15rem;
+    }
+    .funnel-step .f-detail {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.35;
+      margin-top: 0.4rem;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.25s ease, opacity 0.2s ease;
+    }
+    .funnel-step:hover .f-detail {
+      max-height: 100px;
+      opacity: 1;
+    }
+    .funnel-step::after {
+      content: '→';
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      z-index: 2;
+      line-height: 1;
+      opacity: 0.6;
+    }
+    .funnel-step:last-child::after { content: none; }
+    /* Color intensity increases along funnel */
+    .funnel-step:nth-child(1) .f-value { color: var(--text-muted); }
+    .funnel-step:nth-child(2) .f-value { color: var(--accent); }
+    .funnel-step:nth-child(3) .f-value { color: #60a5fa; }
+    .funnel-step:nth-child(4) .f-value { color: var(--cyan); }
+    .funnel-step:nth-child(5) .f-value { color: var(--novel); }
+    .funnel-step.ctoi-step {
+      background: linear-gradient(135deg, rgba(52,211,153,0.06), rgba(52,211,153,0.02));
+      border-color: rgba(52,211,153,0.25);
+    }
+    .funnel-step.ctoi-step .f-value { color: var(--novel); }
+
+    /* ===== SECONDARY STATS ===== */
+    .secondary-grid {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .sec-card {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.6rem 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .sec-card:hover { border-color: var(--border-hover); }
+    .sec-card .s-label {
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .sec-card .s-value {
+      font-family: var(--font);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-top: 0.1rem;
+    }
+    .sec-card .s-sub {
+      font-size: 0.6rem;
+      color: var(--text-dim);
+    }
+
+    /* ===== CTOI SUBMISSIONS ===== */
+    .ctoi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .ctoi-card {
+      background: var(--surface);
+      border: 1px solid rgba(52,211,153,0.2);
+      border-radius: 10px;
+      padding: 1.1rem 1.25rem 0.9rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.15s, transform 0.15s;
+      cursor: pointer;
+    }
+    .ctoi-card:hover { border-color: rgba(52,211,153,0.5); transform: translateY(-1px); }
+    .ctoi-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--novel);
+    }
+    .ctoi-card .ctoi-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+    .ctoi-card .ctoi-tic {
+      font-family: var(--font);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--novel);
+    }
+    .ctoi-card .ctoi-date {
+      font-size: 0.6rem;
+      color: var(--text-dim);
+    }
+    .ctoi-card .ctoi-params {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.35rem 0.75rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.1rem;
+    }
+    .ctoi-card .ctoi-params .cp-val {
+      color: var(--text);
+      font-family: var(--font);
+      font-weight: 500;
+    }
+    .ctoi-card .ctoi-link {
+      display: inline-block;
+      margin-top: 0.65rem;
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.15s;
+    }
+    .ctoi-card .ctoi-link:hover { opacity: 1; text-decoration: underline; }
+
+    /* ===== STAT CARDS (legacy, for candidates tab) ===== */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -196,21 +385,6 @@
       font-size: 0.7rem;
       color: var(--text-dim);
       margin-top: 0.15rem;
-    }
-    .stat-card .detail {
-      font-size: 0.8125rem;
-      color: var(--text-muted);
-      line-height: 1.4;
-      margin-top: 0.5rem;
-      max-height: 0;
-      margin-top: 0;
-      overflow: hidden;
-      opacity: 0;
-      transition: max-height 0.25s ease, opacity 0.2s ease, margin-top 0.25s ease;
-    }
-    .stat-card:hover .detail {
-      max-height: 150px;
-      opacity: 1;
     }
 
     /* ===== SECTION HEADERS ===== */
@@ -753,7 +927,7 @@
   <div class="container">
     <!-- ===== DASHBOARD TAB ===== -->
     <div class="tab-content active" id="tab-dashboard">
-      <div class="stats-grid" id="stats-grid"></div>
+      <div id="stats-grid"></div>
       <div class="section-header">
         <div class="section-title">Top Candidates</div>
       </div>
@@ -848,66 +1022,130 @@
     }
 
     // ===== DASHBOARD =====
+    const CTOI_PROBS = {
+      349059448: { planet: 60, toi: 30 },
+      103605167: { planet: 70, toi: 40 },
+      219435542: { planet: 70, toi: 50 },
+      229741985: { planet: 65, toi: 45 },
+    };
+    function ctoiPlanetProb(tic) { return CTOI_PROBS[tic]?.planet || '?'; }
+    function ctoiTOIProb(tic) { return CTOI_PROBS[tic]?.toi || '?'; }
+
     function renderDashboard() {
       const { stats, candidates, deep_vets } = DATA;
       const gradeA = candidates.filter(c => c.grade === 'A');
       const gradeB = candidates.filter(c => c.grade === 'B');
       const gradeEB = candidates.filter(c => c.grade === 'EB');
+      const gradeAB = candidates.filter(c => c.grade === 'A' || c.grade === 'B');
       const novelPlanetLike = candidates.filter(c => !c.is_known && (c.grade === 'A' || c.grade === 'B'));
-      const ctoisSubmitted = candidates.filter(c => c.matching_toi && String(c.matching_toi).includes('loftus'));
-      const dvConfirmed = (deep_vets || []).filter(d => d.verdict === 'CONFIRMED' || d.verdict === 'REFINED');
+      const ctoisSubmitted = candidates.filter(c => c.ctoi_submitted);
+      const dvAll = deep_vets || [];
+      const dvConfirmed = dvAll.filter(d => d.verdict === 'CONFIRMED' || d.verdict === 'REFINED');
       const rocky = candidates.filter(c => c.planet_type === 'Rocky/Terrestrial');
       const multiPlanet = stats.multi_planet_systems || 0;
+      const totalSignals = candidates.length;
 
+      // Conversion rates
+      const rateSignals = ((totalSignals / stats.targets_processed) * 100).toFixed(1);
+      const ratePlanetLike = ((gradeAB.length / totalSignals) * 100).toFixed(1);
+      const rateDeepVet = dvAll.length > 0 ? ((dvConfirmed.length / dvAll.length) * 100).toFixed(0) : '—';
+      const rateCTOI = dvConfirmed.length > 0 ? ((ctoisSubmitted.length / dvConfirmed.length) * 100).toFixed(0) : '—';
+
+      // ===== FUNNEL =====
       document.getElementById('stats-grid').innerHTML = `
-        <div class="stat-card accent" onclick="filterFromCard('all')">
-          <div class="label">Targets Searched</div>
-          <div class="value">${stats.targets_processed.toLocaleString()}</div>
-          <div class="sub">${stats.no_signal.toLocaleString()} no signal</div>
-          <div class="detail">Unique stars processed via Transit Least Squares. Each gets a full periodic dimming search.</div>
+        <div class="funnel-section">
+          <div class="funnel-label">Detection Funnel</div>
+          <div class="funnel-row">
+            <div class="funnel-step" onclick="filterFromCard('all')">
+              <div class="f-label">Targets Searched</div>
+              <div class="f-value">${stats.targets_processed.toLocaleString()}</div>
+              <div class="f-rate">${stats.no_signal.toLocaleString()} no signal</div>
+              <div class="f-detail">Unique stars scanned with Transit Least Squares for periodic dimming.</div>
+            </div>
+            <div class="funnel-step" onclick="filterFromCard('all')">
+              <div class="f-label">Signals Detected</div>
+              <div class="f-value">${totalSignals.toLocaleString()}</div>
+              <div class="f-rate">${rateSignals}% of targets</div>
+              <div class="f-detail">Any periodic signal found — includes planets, eclipsing binaries, and noise.</div>
+            </div>
+            <div class="funnel-step" onclick="filterFromCard('novel')">
+              <div class="f-label">Planet-Like</div>
+              <div class="f-value">${gradeAB.length}</div>
+              <div class="f-rate">${ratePlanetLike}% of signals</div>
+              <div class="f-detail">Grade A/B: passed automated vetting (SDE, SNR, shape, odd/even consistency).</div>
+            </div>
+            <div class="funnel-step" onclick="showTab('deepvet')">
+              <div class="f-label">Deep Vet Confirmed</div>
+              <div class="f-value">${dvConfirmed.length}</div>
+              <div class="f-rate">${rateDeepVet}% of ${dvAll.length} tested</div>
+              <div class="f-detail">Signal held or strengthened when stacking all available TESS sectors across years.</div>
+            </div>
+            <div class="funnel-step ctoi-step">
+              <div class="f-label">CTOIs Submitted</div>
+              <div class="f-value">${ctoisSubmitted.length}</div>
+              <div class="f-rate">Epoch-confirmed, on ExoFOP</div>
+              <div class="f-detail">Passed all checks: deep vet, epoch test, centroid, BLS. Submitted to NASA ExoFOP for TOI review.</div>
+            </div>
+          </div>
         </div>
-        <div class="stat-card novel" onclick="filterFromCard('A')">
-          <div class="label">Grade A</div>
-          <div class="value">${gradeA.length}</div>
-          <div class="sub">Strong, no red flags</div>
-          <div class="detail">Passed all automated checks: SDE ≥ 7, SNR ≥ 5, reasonable depth/period, consistent odd/even transits, no V-shaped eclipses.</div>
+
+        <div class="funnel-section">
+          <div class="funnel-label">Breakdown</div>
+          <div class="secondary-grid">
+            <div class="sec-card" onclick="filterFromCard('A')">
+              <div class="s-label">Grade A</div>
+              <div class="s-value" style="color:var(--novel)">${gradeA.length}</div>
+              <div class="s-sub">Strong, no red flags</div>
+            </div>
+            <div class="sec-card" onclick="filterFromCard('B')">
+              <div class="s-label">Grade B</div>
+              <div class="s-value" style="color:var(--warning)">${gradeB.length}</div>
+              <div class="s-sub">Needs more data</div>
+            </div>
+            <div class="sec-card" onclick="filterFromCard('EB')">
+              <div class="s-label">Eclipsing Binaries</div>
+              <div class="s-value" style="color:var(--danger)">${gradeEB.length}</div>
+              <div class="s-sub">Filtered out</div>
+            </div>
+            <div class="sec-card" onclick="filterFromCard('rocky')">
+              <div class="s-label">Rocky (R &lt; 1.5 R⊕)</div>
+              <div class="s-value" style="color:#a78bfa">${rocky.length}</div>
+            </div>
+            <div class="sec-card" onclick="filterFromCard('multi')">
+              <div class="s-label">Multi-Planet</div>
+              <div class="s-value" style="color:#f472b6">${multiPlanet}</div>
+            </div>
+          </div>
         </div>
-        <div class="stat-card warning" onclick="filterFromCard('B')">
-          <div class="label">Grade B</div>
-          <div class="value">${gradeB.length}</div>
-          <div class="sub">Needs more data</div>
-          <div class="detail">Signal detected but with at least one flag: marginal SDE, few transits, or minor vetting concerns.</div>
+
+        ${ctoisSubmitted.length > 0 ? `
+        <div class="funnel-section">
+          <div class="funnel-label">Submitted Candidates — Awaiting TOI Review</div>
+          <div style="display:grid;grid-template-columns:repeat(${ctoisSubmitted.length}, 1fr);gap:0.75rem">
+            ${ctoisSubmitted.sort((a,b) => (b.ctoi_submitted?.sde_deep||0) - (a.ctoi_submitted?.sde_deep||0)).map(c => {
+              const sub = c.ctoi_submitted;
+              return `
+              <div class="ctoi-card" onclick="showDetail(${c.tic_id}, ${c.planet_num})">
+                <div class="ctoi-header">
+                  <span class="ctoi-tic">TIC ${c.tic_id}</span>
+                  <span class="ctoi-date">${sub.date}</span>
+                </div>
+                <div class="ctoi-params">
+                  <div>Period <span class="cp-val">${c.period_days.toFixed(4)}d</span></div>
+                  <div>Depth <span class="cp-val">${(c.depth_ppt * 1000).toFixed(0)} ppm</span></div>
+                  <div>SDE <span class="cp-val">${(sub.sde_deep || c.sde).toFixed(1)}</span></div>
+                  <div>SNR <span class="cp-val">${c.snr.toFixed(1)}</span></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.5rem;font-size:0.65rem">
+                  <span style="color:var(--text-dim)">Planet <span style="color:${ctoiPlanetProb(c.tic_id) >= 65 ? 'var(--novel)' : 'var(--warning)'};font-weight:600">${ctoiPlanetProb(c.tic_id)}%</span></span>
+                  <span style="color:var(--text-dim)">TOI <span style="color:${ctoiTOIProb(c.tic_id) >= 45 ? 'var(--novel)' : 'var(--warning)'};font-weight:600">${ctoiTOIProb(c.tic_id)}%</span></span>
+                  <a class="ctoi-link" href="https://exofop.ipac.caltech.edu/tess/target.php?id=${c.tic_id}" target="_blank" onclick="event.stopPropagation()" style="margin-top:0;margin-left:auto">ExoFOP →</a>
+                </div>
+              </div>`;
+            }).join('')}
+          </div>
         </div>
-        <div class="stat-card rocky" onclick="filterFromCard('rocky')">
-          <div class="label">Rocky Planets</div>
-          <div class="value">${rocky.length}</div>
-          <div class="sub">R &lt; 1.5 R&#8853;</div>
-          <div class="detail">Estimated radius below 1.5 Earth radii based on transit depth and host star size from TIC.</div>
-        </div>
-        <div class="stat-card multi" onclick="filterFromCard('multi')">
-          <div class="label">Multi-Planet</div>
-          <div class="value">${multiPlanet}</div>
-          <div class="sub">Systems with 2+ signals</div>
-          <div class="detail">Stars where subtracting the strongest signal revealed a second periodic dip. Near-resonant period ratios increase credibility.</div>
-        </div>
-        <div class="stat-card danger" onclick="filterFromCard('EB')">
-          <div class="label">Eclipsing Binaries</div>
-          <div class="value">${gradeEB.length}</div>
-          <div class="sub">Filtered out</div>
-          <div class="detail">Two stars eclipsing each other, not planets. Identified by V-shaped transits, secondary eclipses, large depths, or odd/even depth mismatches.</div>
-        </div>
-        <div class="stat-card cyan" onclick="showTab('deepvet')">
-          <div class="label">Deep Vet Survivors</div>
-          <div class="value">${dvConfirmed.length}</div>
-          <div class="sub">of ${(deep_vets||[]).length} tested</div>
-          <div class="detail">Signal held steady when stacking all available TESS sectors. Not all survivors pass later checks like epoch tests or centroid analysis.</div>
-        </div>
-        <div class="stat-card novel" onclick="filterFromCard('novel')">
-          <div class="label">Novel Planet-Like</div>
-          <div class="value">${novelPlanetLike.length}</div>
-          <div class="sub">Grade A/B, not in catalogs</div>
-          <div class="detail">Not in the NASA TOI catalog or ExoFOP CTOI list. Potential new discoveries pending deep vetting and epoch confirmation.</div>
-        </div>
+        ` : ''}
       `;
 
       // Top candidates: Grade A sorted by SDE
@@ -1135,8 +1373,12 @@
             <h2>TIC ${c.tic_id}${c.planet_num > 1 ? ' — Planet #'+c.planet_num : ''}</h2>
             <span class="badge ${c.is_known ? 'known' : 'novel'}">${c.is_known ? 'Known — TOI '+(c.matching_toi||'?') : 'Novel'}</span>
             <span class="badge grade-${c.grade.toLowerCase()}">${c.grade === 'EB' ? 'Eclipsing Binary' : 'Grade ' + c.grade}</span>
+            ${c.ctoi_submitted ? `<span class="badge novel" style="font-weight:600">CTOI Submitted</span>` : ''}
           </div>
-          <span class="detail-close" onclick="closeDetail()">✕</span>
+          <div style="display:flex;align-items:center;gap:0.75rem">
+            <a href="https://exofop.ipac.caltech.edu/tess/target.php?id=${c.tic_id}" target="_blank" style="font-size:0.7rem;color:var(--accent);text-decoration:none;opacity:0.8" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8">ExoFOP ↗</a>
+            <span class="detail-close" onclick="closeDetail()">✕</span>
+          </div>
         </div>
         <div class="detail-body">
           <h3 style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem">Orbital Parameters<span class="tip" data-tip="Key measurements of the candidate's orbit derived from transit fitting">?</span></h3>
@@ -1197,6 +1439,19 @@
           </div>
 
           ${dvSection}
+
+          ${c.ctoi_submitted ? `
+          <div class="detail-section">
+            <h3 style="color:var(--novel)">CTOI Submission</h3>
+            <div class="detail-grid">
+              <div class="detail-item"><div class="label">CTOI ID</div><div class="val" style="color:var(--novel)">${c.ctoi_submitted.ctoi}</div></div>
+              <div class="detail-item"><div class="label">Submitted</div><div class="val">${c.ctoi_submitted.date}</div></div>
+              <div class="detail-item"><div class="label">Tag</div><div class="val" style="font-size:0.7rem">${c.ctoi_submitted.tag}</div></div>
+              <div class="detail-item"><div class="label">Deep Vet SDE</div><div class="val" style="color:var(--novel)">${c.ctoi_submitted.sde_deep}</div></div>
+            </div>
+            <a href="https://exofop.ipac.caltech.edu/tess/target.php?id=${c.tic_id}" target="_blank" style="display:inline-block;margin-top:0.5rem;font-size:0.75rem;color:var(--accent);text-decoration:none">View on ExoFOP →</a>
+          </div>
+          ` : ''}
 
           ${c.plot_filename ? `
             <div class="detail-section">
