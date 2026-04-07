@@ -87,8 +87,6 @@
       border-bottom: 1px solid var(--border);
     }
     .nav-inner {
-      max-width: 1400px;
-      margin: 0 auto;
       display: flex;
       align-items: center;
       padding: 0 2rem;
@@ -516,27 +514,28 @@
       background: rgba(0,0,0,0.6);
       backdrop-filter: blur(4px);
     }
-    .detail-overlay.open { display: flex; justify-content: center; align-items: flex-start; padding-top: 5vh; }
+    .detail-overlay.open { display: flex; justify-content: center; align-items: center; }
     .detail-panel {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
-      width: 90%;
-      max-width: 900px;
-      max-height: 85vh;
-      overflow-y: auto;
+      width: 96%;
+      max-width: 1400px;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
       box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      overflow: hidden;
     }
     .detail-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.25rem 1.5rem;
+      padding: 0.75rem 1.25rem;
       border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
       background: var(--surface);
       z-index: 1;
+      flex-shrink: 0;
     }
     .detail-header h2 {
       font-family: var(--font);
@@ -552,12 +551,29 @@
       transition: all 0.15s;
     }
     .detail-close:hover { background: var(--surface-2); color: var(--text); }
-    .detail-body { padding: 1.5rem; }
+    .detail-layout {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+    }
+    .detail-body {
+      width: 38%;
+      flex-shrink: 0;
+      padding: 1.25rem;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+    }
+    .detail-3d-side {
+      flex: 1;
+      min-width: 0;
+      background: #000;
+      position: relative;
+    }
     .detail-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1rem;
-      margin-bottom: 1.25rem;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1rem;
     }
     .detail-item .label {
       font-size: 0.65rem;
@@ -894,6 +910,191 @@
       transform: none;
     }
 
+    /* ===== VIEW WORLD BUTTON ===== */
+    .view-world-btn {
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text-dim);
+      transition: color 0.15s;
+      line-height: 1;
+    }
+    .view-world-btn:hover { color: var(--accent); }
+
+    /* ===== WORLDS TAB ===== */
+    .worlds-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .world-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+    .world-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .world-card-star {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 1rem;
+    }
+    .world-card-star-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      position: absolute;
+      z-index: 2;
+    }
+    .world-card-orbit {
+      position: absolute;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    .world-card-badge {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: var(--novel);
+      color: var(--bg);
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+    .world-card-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    .world-card-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    .world-card-stats {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      margin-bottom: 0.4rem;
+    }
+    .world-card-notable {
+      font-size: 0.7rem;
+      color: var(--accent);
+      line-height: 1.4;
+    }
+
+    /* 3D Viewer */
+    .worlds-viewer {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 72px);
+    }
+    .worlds-viewer-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0;
+      flex-shrink: 0;
+    }
+    .worlds-back-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: border-color 0.2s;
+    }
+    .worlds-back-btn:hover { border-color: var(--accent); }
+    .worlds-viewer-info { flex: 1; }
+    .worlds-viewer-info h2 { font-size: 1.1rem; margin: 0; color: var(--text); }
+    .worlds-viewer-info .subtitle { font-size: 0.75rem; color: var(--text-muted); }
+    .worlds-viewer-body {
+      display: flex;
+      flex: 1;
+      gap: 0;
+      min-height: 0;
+    }
+    .worlds-3d-container {
+      flex: 1;
+      min-height: 0;
+      background: #000;
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+      position: relative;
+    }
+    .worlds-3d-container canvas { display: block; }
+    .worlds-sidebar {
+      width: 200px;
+      flex-shrink: 0;
+      padding: 0.75rem;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      overflow-y: auto;
+    }
+    .worlds-sidebar-section h4 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      margin: 0 0 0.5rem;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.4rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      transition: background 0.15s, color 0.15s;
+    }
+    .legend-item:hover { background: var(--surface-2); color: var(--text); }
+    .legend-item.active { background: var(--accent-glow); color: var(--accent); }
+    .legend-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-dim);
+      flex-shrink: 0;
+    }
+    .legend-item.active .legend-dot { background: var(--accent); }
+    .worlds-speed-control {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+    .worlds-speed-control input[type=range] {
+      flex: 1;
+      accent-color: var(--accent);
+      height: 4px;
+    }
+    .worlds-desc {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       .container { padding: 1rem; }
@@ -903,21 +1104,33 @@
       .nav-right { display: none; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .data-table { font-size: 0.7rem; }
-      .detail-panel { width: 95%; }
+      .detail-panel { width: 98%; height: 95vh; }
+      .detail-layout { flex-direction: column; }
+      .detail-body { width: 100%; border-right: none; border-bottom: 1px solid var(--border); max-height: 50%; }
+      .detail-3d-side { min-height: 200px; }
       .dv-cards { grid-template-columns: 1fr; }
     }
   </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
 </head>
 <body>
   <nav>
     <div class="nav-inner">
-      <div class="nav-brand">Exoplanet Transit Search</div>
+      <div class="nav-brand" onclick="showTab('dashboard')" style="cursor:pointer">Exoplanet Transit Search</div>
       <div class="nav-links">
         <div class="nav-link active" onclick="showTab('dashboard')">Dashboard</div>
         <div class="nav-link" onclick="showTab('candidates')">Candidates</div>
         <div class="nav-link" onclick="showTab('gallery')">Planet Gallery</div>
         <div class="nav-link" onclick="showTab('deepvet')">Deep Vet</div>
         <div class="nav-link" onclick="showTab('pipeline')">Pipeline Stats</div>
+        <div class="nav-link" onclick="showTab('worlds')">Worlds</div>
         <div class="nav-link" onclick="showTab('guide')">Guide</div>
       </div>
       <div class="nav-right" id="nav-timestamp"></div>
@@ -976,6 +1189,56 @@
       <div class="pipeline-grid" id="pipeline-grid"></div>
     </div>
 
+    <!-- ===== WORLDS TAB ===== -->
+    <div class="tab-content" id="tab-worlds">
+      <!-- Grid view -->
+      <div id="worlds-grid-wrap">
+        <div class="section-header">
+          <div class="section-title">Exoplanet Systems Library</div>
+        </div>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1.25rem;">
+          Interactive 3D views of real exoplanet systems. Click a system to explore its orbits, planets, and star.
+        </p>
+        <div class="worlds-grid" id="worlds-grid"></div>
+      </div>
+
+      <!-- 3D viewer -->
+      <div id="worlds-viewer-wrap" style="display:none">
+        <div class="worlds-viewer">
+          <div class="worlds-viewer-header">
+            <button class="worlds-back-btn" onclick="worldsAPI.closeSystem()">&#8592; Back</button>
+            <div class="worlds-viewer-info">
+              <h2 id="worlds-viewer-title"></h2>
+              <div class="subtitle" id="worlds-viewer-subtitle"></div>
+            </div>
+          </div>
+          <div class="worlds-viewer-body">
+            <div class="worlds-3d-container" id="worlds-3d-container"></div>
+            <div class="worlds-sidebar">
+              <div class="worlds-sidebar-section">
+                <h4>Objects</h4>
+                <div id="worlds-legend"></div>
+              </div>
+              <div class="worlds-sidebar-section">
+                <h4>Speed</h4>
+                <div class="worlds-speed-control">
+                  <input type="range" id="worlds-speed-slider" min="0" max="100" value="50">
+                  <span id="worlds-speed-label">1.0x</span>
+                </div>
+              </div>
+              <div class="worlds-sidebar-section">
+                <h4>About</h4>
+                <div class="worlds-desc" id="worlds-viewer-desc"></div>
+              </div>
+              <div class="worlds-sidebar-section" style="margin-top:auto; font-size:0.65rem; color:var(--text-dim);">
+                WASD to fly &middot; Click to focus &middot; Scroll to zoom
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ===== GUIDE TAB ===== -->
     <div class="tab-content" id="tab-guide">
       <div class="guide-content" id="guide-content"></div>
@@ -988,17 +1251,22 @@
   </div>
 
   <script>
-    let DATA = null;
+    var DATA = null;
     let currentFilter = 'all';
     let currentSort = 'sde';
     let sortDir = -1; // descending
 
     // ===== NAVIGATION =====
+    let _lastTab = 'dashboard';
     function showTab(name) {
+      // Worlds tab lifecycle
+      if (_lastTab === 'worlds' && name !== 'worlds' && window.worldsAPI) window.worldsAPI.onTabHide();
       document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
       document.getElementById('tab-' + name).classList.add('active');
       document.querySelector(`.nav-link[onclick="showTab('${name}')"]`).classList.add('active');
+      if (name === 'worlds' && window.worldsAPI) window.worldsAPI.onTabShow();
+      _lastTab = name;
     }
 
     // ===== LOAD DATA =====
@@ -1025,7 +1293,7 @@
     const CTOI_PROBS = {
       349059448: { planet: 60, toi: 30 },
       103605167: { planet: 70, toi: 40 },
-      219435542: { planet: 70, toi: 50 },
+      219435542: { planet: 75, toi: 55 },
       229741985: { planet: 65, toi: 45 },
     };
     function ctoiPlanetProb(tic) { return CTOI_PROBS[tic]?.planet || '?'; }
@@ -1295,6 +1563,7 @@
               <th onclick="toggleSort('sde')" class="${currentSort==='sde'?'sorted':''}">SDE<span class="tip" data-tip="Signal Detection Efficiency — strength of the periodic signal. Higher = more confident detection">?</span></th>
               <th onclick="toggleSort('snr')" class="${currentSort==='snr'?'sorted':''}">SNR<span class="tip" data-tip="Signal-to-Noise Ratio — transit signal strength relative to noise. Higher = cleaner signal">?</span></th>
               <th>Transits<span class="tip" data-tip="Number of individual transit events detected in the light curve">?</span></th>
+              <th style="width:2rem"></th>
             </tr>
           </thead>
           <tbody>
@@ -1317,6 +1586,7 @@
                 <td style="color:${c.sde >= 15 ? 'var(--novel)' : c.sde >= 10 ? 'var(--accent)' : 'var(--text)'}">${c.sde.toFixed(1)}</td>
                 <td>${c.snr.toFixed(1)}</td>
                 <td>${c.n_transits || c.n_transit_times}</td>
+                <td><span class="view-world-btn" title="View World" onclick="event.stopPropagation(); worldsAPI.viewCandidateWorld(${c.tic_id}, ${c.planet_num})">&#9788;</span></td>
               </tr>`;
             }).join('')}
           </tbody>
@@ -1376,10 +1646,12 @@
             ${c.ctoi_submitted ? `<span class="badge novel" style="font-weight:600">CTOI Submitted</span>` : ''}
           </div>
           <div style="display:flex;align-items:center;gap:0.75rem">
+            <button onclick="worldsAPI.viewCandidateWorld(${c.tic_id}, ${c.planet_num})" style="background:var(--surface-2);border:1px solid var(--border);color:var(--accent);padding:0.3rem 0.6rem;border-radius:4px;cursor:pointer;font-size:0.7rem;transition:border-color 0.2s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">View World</button>
             <a href="https://exofop.ipac.caltech.edu/tess/target.php?id=${c.tic_id}" target="_blank" style="font-size:0.7rem;color:var(--accent);text-decoration:none;opacity:0.8" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8">ExoFOP ↗</a>
             <span class="detail-close" onclick="closeDetail()">✕</span>
           </div>
         </div>
+        <div class="detail-layout">
         <div class="detail-body">
           <h3 style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem">Orbital Parameters<span class="tip" data-tip="Key measurements of the candidate's orbit derived from transit fitting">?</span></h3>
           <div class="detail-grid">
@@ -1463,12 +1735,19 @@
             </div>
           ` : ''}
         </div>
+        <div class="detail-3d-side" id="detail-3d-container"></div>
+        </div>
       `;
       document.getElementById('detail-overlay').classList.add('open');
       document.body.style.overflow = 'hidden';
+      // Init 3D view for this candidate (defaults used if stellar data missing)
+      if (window.worldsAPI) {
+        setTimeout(() => window.worldsAPI.initDetailView(c), 100);
+      }
     }
 
     function closeDetail() {
+      if (window.worldsAPI) window.worldsAPI.disposeDetailView();
       document.getElementById('detail-overlay').classList.remove('open');
       document.body.style.overflow = '';
     }
@@ -1771,12 +2050,30 @@
           <li><strong>batman:</strong> Transit model fitting. Cite: Kreidberg 2015.</li>
           <li><strong>TOI Catalog:</strong> NASA Exoplanet Archive TAP service.</li>
         </ul>
+
+        <h2>3D Worlds Viewer</h2>
+        <p>The <strong>Worlds</strong> tab provides interactive 3D views of real exoplanet systems, powered by Three.js. The library includes 10 pre-built systems ported from Project Tycho:</p>
+        <ul>
+          <li><strong>Proxima Centauri</strong> — Nearest star with periodic stellar flares</li>
+          <li><strong>TOI-700</strong> — TESS discovery with two habitable zone planets</li>
+          <li><strong>TRAPPIST-1</strong> — Seven rocky worlds, three in the habitable zone</li>
+          <li><strong>51 Pegasi</strong> — First exoplanet around a Sun-like star (Nobel Prize 2019)</li>
+          <li><strong>55 Cancri</strong> — Lava world Janssen + habitable zone gas giant</li>
+          <li><strong>Kepler-16</strong> — "Tatooine" circumbinary planet orbiting two stars</li>
+          <li><strong>WASP-121</strong> — Ultra-hot Jupiter with atmospheric metal escape</li>
+          <li><strong>Kepler-90</strong> — Eight-planet system, Kepler-90i discovered by AI</li>
+          <li><strong>HR 8799</strong> — First multi-planet system ever directly imaged</li>
+          <li><strong>PSR B1257+12 (Lich)</strong> — First exoplanets ever found, orbiting a pulsar</li>
+        </ul>
+        <p>For pipeline candidates, the system generates dynamic 3D views using a <strong>texture-matching</strong> approach: stellar Teff determines star color across 8 spectral class bands, and planet type/radius selects the closest matching real texture. Every candidate row in the table has a ☼ icon to open its 3D view.</p>
+        <p><strong>Controls:</strong> WASD keys to fly, mouse to orbit, scroll to zoom, click objects to focus.</p>
       `;
     }
 
     // ===== INIT =====
     loadData();
   </script>
+  <script type="module" src="js/worlds.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
